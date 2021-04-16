@@ -2,7 +2,7 @@
  * calculos.c
  *
  *  Created on: Apr 8, 2021
- *      Author: andre
+ *      Author: AANDREA BRICEÑO
  */
 
 
