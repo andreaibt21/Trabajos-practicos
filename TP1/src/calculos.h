@@ -9,19 +9,11 @@
 #define CALCULOS_H_
 
 
-/*BREIF Es una función para que comience el programa;
- * El menu tiene cinco opciones
- *	1. Ingresar 1er operando (A=x)
- *	2. Ingresar 2do operando (B=y)
- *	3. Calcular todas las operaciones de suma, resta, division y multiplicacion
- *	4. Muestra el resultadao de las operaciones del paso 3;
- *	5. Sales del menú
- * */
-int utn_menu();
 
-int utn_ingresarNumero();
-int utn_getSuma(int numero1, int numer2);
-
+int utn_getSuma(int numero1, int numero2, int *respuestaSuma);
+int utn_getResta(int numero1, int numero2, int *respuestaResta);
+int utn_getDivision(int numero1, int numero2, int *respuestaDivision);
+int utn_getMultiplicacion(int numero1, int numero2, int *respuestaMultiplicacion);
 
 
 

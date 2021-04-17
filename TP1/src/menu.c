@@ -10,15 +10,17 @@
 int utn_getNumero(int *resultado, char *mensaje, char *mensajeError, int minimo, int maximo){
 
 	int retorno = -1;
-	int buffer ; //variable auxiliar;
+	int auxiliar ; //variable auxiliar;
 	if (resultado != NULL  && mensaje != NULL && mensajeError != NULL && minimo <= maximo ){
 
-		do{
+
 		printf("%s \n", mensaje);
-		scanf("%d", &buffer);
-		if(buffer >= minimo && buffer <=maximo ){
-			*resultado =buffer;
-		printf("Opcion seleccionada %d", buffer);
+		scanf("%d", &auxiliar);
+		if(auxiliar >= minimo && auxiliar <=maximo ){
+			*resultado =auxiliar;
+
+
+		printf("Numero ingresado: %d\n", auxiliar);
 			retorno = 0;
 
 		}else{
@@ -26,7 +28,7 @@ int utn_getNumero(int *resultado, char *mensaje, char *mensajeError, int minimo,
 			printf("%s", mensajeError);
 			retorno = -1;
 		};
-		}while(*resultado != 5);
+
 	}
 	return retorno;
 };
