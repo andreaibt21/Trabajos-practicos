@@ -1,12 +1,13 @@
 /*
  * menu.c
  *
- *  Created on: Apr 16, 2021
- *      Author: andrea briceño
+ *  Creado en: Abril 16, 2021
+ *      Autor: Andrea Briceño
  */
 
 #include <stdio.h>
 #include <stdlib.h>
+
 int utn_getNumero(int *resultado, char *mensaje, char *mensajeError, int minimo, int maximo){
 
 	int retorno = -1;
@@ -19,8 +20,6 @@ int utn_getNumero(int *resultado, char *mensaje, char *mensajeError, int minimo,
 		if(auxiliar >= minimo && auxiliar <=maximo ){
 			*resultado =auxiliar;
 
-
-		printf("Numero ingresado: %d\n", auxiliar);
 			retorno = 0;
 
 		}else{

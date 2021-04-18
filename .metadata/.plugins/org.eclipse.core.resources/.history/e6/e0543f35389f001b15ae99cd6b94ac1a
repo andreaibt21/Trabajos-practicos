@@ -1,0 +1,24 @@
+/*
+ * funciones.h
+ *
+ *  Created on: Apr 8, 2021
+ *      Author: andrea briceño
+ */
+
+#ifndef CALCULOS_H_
+#define CALCULOS_H_
+
+
+/*BREIF
+ * solicitaa un numero y lo devuel
+ * */
+int utn_menu();
+
+int utn_ingresarNumero();
+int utn_getSuma(int numero1, int numer2);
+
+
+
+
+
+#endif /* CALCULOS_H_ */

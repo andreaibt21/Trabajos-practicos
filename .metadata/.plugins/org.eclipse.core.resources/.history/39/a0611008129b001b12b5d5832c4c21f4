@@ -1,0 +1,105 @@
+/*
+ ============================================================================
+ Name        : TP1.c
+ Author      : 	ANDREA BRICEÑO
+ ============================================================================
+
+1. Ingresar 1er operando (A=x)
+2. Ingresar 2do operando (B=y)
+3. Calcular todas las operaciones
+a) Calcular la suma (A+B)
+b) Calcular la resta (A-B)
+c) Calcular la division (A/B)
+d) Calcular la multiplicacion (A*B)
+e) Calcular el factorial (A!)
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+//#include "calculos.h"
+
+int utn_menu();
+int main(void) {
+	setbuf(stdout,NULL);
+
+	utn_menu();
+
+
+
+
+	//utn_ingresarNumeros();
+		return EXIT_SUCCESS;
+
+};
+
+
+int utn_menu(){
+
+	printf("MENU ");
+	printf(	"\n 1. Ingresar 1er operando (A=x) ");
+	printf("\n 2. Ingresar 2do operando (B=y)");
+	printf("\n 3. Calcular todas las operaciones ");
+	printf("\n 4. Informar resultados");
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+int utn_ingresarNumeros();
+int utn_ingresarNumeros(){
+	int retorno = 0;
+	int numero1, numero2;
+	printf("Ingrese el primer numero");
+	scanf("%d", &numero1);
+	printf("\nIngrese el segundo numero\n");
+	scanf("%d", &numero2);
+	printf("\nlos numeros ingresados son %d , %d \n", numero1, numero2);
+
+	return retorno;
+};
+
+//a) Calcular la suma (A+B)
+
+
+ * breifCalcula la suma de dos numeros
+ * paraam1 recibe un numero entero para sumar
+ * paraam2 recibe un numero entero para sumar
+ * Retorno devuelve la suma de los numeros recibidos por parametros
+ *
+
+
+
+int utn_getSuma(int A, int B);
+
+ int utn_getSuma((int A, int B)
+{
+	int A;
+	int B;
+	int resultadoSuma;
+
+	resultadoSuma = A+B;
+
+
+	return resultadoSuma;
+};
+*/

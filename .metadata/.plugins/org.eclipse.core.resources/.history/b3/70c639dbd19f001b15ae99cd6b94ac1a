@@ -1,0 +1,51 @@
+/*
+ * funciones.h
+ *
+ *  Created on: Apr 8, 2021
+ *      Author: andrea briceño
+ */
+
+#ifndef CALCULOS_H_
+#define CALCULOS_H_
+
+/*
+ * BRIEf calcula la suma de dos numeros
+ * param recibe un numero entero para sumar
+ * param recibe un numero entero para sumar
+ * param recibe un puntero para guardar el resultado de la suma entre los parametros
+ *
+ * */
+int utn_getSuma(int numero1, int numero2, int *respuestaSuma);
+
+
+/*
+ * BRIEf calcula la resta de dos numeros
+ * param recibe un numero entero para restar
+ * param recibe un numero entero para restar
+ * param recibe un puntero para guardar el resultado de la resta entre los parametros
+ *
+ * */
+int utn_getResta(int numero1, int numero2, int *respuestaResta);
+
+/*
+ * BRIEf calcula la division de dos numeros
+ * param recibe un numero entero para usarlo de dividendo
+ * param recibe un numero entero para usarlo como divisor
+ * param recibe un puntero para guardar el resultado de la division entre los parametros
+ *
+ * */
+int utn_getDivision(int numero1, int numero2, float *respuestaDivision);
+
+/*
+ * BRIEf calcula la multiplicacion de dos numeros
+ * param recibe un numero entero para usarlo de dividendo
+ * param recibe un numero entero para usarlo como divisor
+ * param recibe un puntero para guardar el producto los parametros
+ *
+ * */
+int utn_getMultiplicacion(int numero1, int numero2, int *respuestaMultiplicacion);
+
+
+
+
+#endif /* CALCULOS_H_ */

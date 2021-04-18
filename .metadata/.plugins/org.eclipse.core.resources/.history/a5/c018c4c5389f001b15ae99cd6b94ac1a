@@ -1,0 +1,31 @@
+/*
+ * calculos.c
+ *
+ *  Created on: Apr 8, 2021
+ *      Author: ANDREA BRICEÑO
+ */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+int utn_getSuma(int numero1, int numero2, int *respuestaSuma);
+{
+
+	if(respuestaSuma != NULL){
+	*respuestaSuma = numero1+numero2;
+
+	};
+	return 0;
+};
+
+
+
+
+
+
+
+
+
