@@ -95,7 +95,7 @@ int main(void) {
 					if (seIngresoPrimerNumero == 1 && seIngresoSegundoNumero == 1){
 
 						seHicieronLosCalculos = 1;
-						printf("\nLos calculos han sido realizados\n");
+						printf("A = %d, B = %d\n", numero1, numero2);
 						utn_getSuma(numero1, numero2, &resultadoSuma);
 						utn_getResta(numero1, numero2, &resultadoResta);
 						utn_getDivision(numero1, numero2, &resultadoDivision);

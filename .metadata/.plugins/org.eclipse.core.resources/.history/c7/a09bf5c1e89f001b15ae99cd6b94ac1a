@@ -66,7 +66,7 @@ int main(void) {
 
 
 
-			utn_getNumero(&opcion,"\n\n  Ingrese una opcion \n", "\nError, ingrese un numero del 1 al 5 \n\n", 1,5);
+			utn_getNumero(&opcion,"\n Ingrese una opcion \n", "\nError, ingrese un numero del 1 al 5 \n\n", 1,5);
 
 			switch (opcion){
 
@@ -95,7 +95,7 @@ int main(void) {
 					if (seIngresoPrimerNumero == 1 && seIngresoSegundoNumero == 1){
 
 						seHicieronLosCalculos = 1;
-						printf("\nLos calculos han sido realizados\n");
+						printf("A = %d, B = %d\n", numero1, numero2);
 						utn_getSuma(numero1, numero2, &resultadoSuma);
 						utn_getResta(numero1, numero2, &resultadoResta);
 						utn_getDivision(numero1, numero2, &resultadoDivision);
@@ -104,7 +104,7 @@ int main(void) {
 						unt_getFactorial(numero2, &resultadoFactorial2);
 					} else{
 
-						printf("Error, debe de ingresar los dos operandos para realizar las operaciones\n");
+						printf("Error, debe de ingresar los dos operandos para realizar las operaciones");
 
 					};
 						break;
