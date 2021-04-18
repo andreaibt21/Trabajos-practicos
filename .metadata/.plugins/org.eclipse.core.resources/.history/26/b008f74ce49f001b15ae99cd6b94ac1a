@@ -100,6 +100,14 @@ int main(void) {
 				case 4:
 					if (seHicieronLosCalculos == 1){
 
+						/*
+						 * a) “El resultado de A+B es: r”
+							b) “El resultado de A-B es: r”
+							c) “El resultado de A/B es: r” o “No es posible dividir por cero”
+							d) “El resultado de A*B es: r”
+							e) “El factorial de A es: r1 y El factorial de B es: r2”
+							*/
+
 						//suma
 						printf(" El resultado de %d+%d es: %d \n",numero1,numero2,resultadoSuma);
 						//restaa
