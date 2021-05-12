@@ -11,112 +11,109 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define CANTIDADALUMNOS 3
 #include <string.h>
 #include <ctype.h>
 
+#include "ArrayEmpleados.h"
+#include "utn.h"
+#define  CANTIDADEMPLEADOS 3
+#define LARGODESTRING 51
+
 //almunos.h en el punto c incluyo el .h para que las funciones me sirven
-typedef struct {
-	int legajo;
-	char sexo;
-	int edad;
-	int nota1;
-	int nota2;
-	float promedio;
-	char apellido[30];
-	int isEmpty;
 
-} datosPersonales;
 
-int inicializarEstructura(datosPersonales array[], int tamano);
-int mostrarSiCargoBien(datosPersonales array[], int tamano);
-int buscarLibre(datosPersonales array[], int tamano);
-int utn_getNumero(int *resultado, char *mensaje, char *mensajeError, int minimo, int maximo, int reintentos);
+int inicializarEstructuraEmpleados(estructuraEmpleados array[], int tamano);
+int buscarLibre(estructuraEmpleados array[], int tamano);
 int utn_getString(char auxiliar[], char *mensaje, char *mensajeError, int reintentos);
-int utn_getCharSexo(char *variableChar, char *mensaje, char *mensajeError, int reintentos);
+int mostrarUnEstudiante( estructuraEmpleados unEmpleado);
+int mostrarTodosLosEstudiantes(estructuraEmpleados array[], int tamano);
+int agregarEmpleado( estructuraEmpleados   array[], int tamanoDeArray, int *contadorDeLegajo );
+int modificarAlumno( estructuraEmpleados   array[], int tamanoDeArray, int posicion);
+int buscarLegajo(estructuraEmpleados array[], int tamanoDeArray);
+int borrarElEmpleado(estructuraEmpleados array[], int tamano);
+
+//int mostrarSiCargoBien(estructuraEmpleados array[], int tamano);
+//int utn_getCharSexo(char *variableChar, char *mensaje, char *mensajeError, int reintentos);
 //void utn_getChar(char *variableChar, char *mensaje, char *mensajeError,int minimo, int maximo, int reintentos);
-int mostrarMenu(int *respuesta);
-int mostrarUnEstudiante( datosPersonales unAlumno);
-int mostrarTodosLosEstudiantes(datosPersonales array[], int tamano);
-int promediarNotas(float *promedio, int nota1, int nota2);
-int agregarAlumno( datosPersonales   array[], int tamanoDeArray, int *contadorDeLegajo );
-int modificarAlumno( datosPersonales   array[], int tamanoDeArray, int posicion);
-int buscarLegajo(datosPersonales array[], int tamanoDeArray);
+//int promediarNotas(float *promedio, int nota1, int nota2);
 
-///MAIN
-
-
+/// ----------------------------------          MAIN          -----------------------------------------
 int main(void) {
 	setbuf(stdout, NULL); //ESTO VA SIEMPRE
 
-	datosPersonales alumno[CANTIDADALUMNOS];
+	estructuraEmpleados empleado[CANTIDADEMPLEADOS];
 
-	inicializarEstructura(alumno, CANTIDADALUMNOS);
+	inicializarEstructuraEmpleados(empleado, CANTIDADEMPLEADOS);
 
-	//mostrarSiCargoBien(alumno, CANTIDADALUMNOS);
 
 	int respuesta = 0;
-	int legajo;
+
     int contadorDeLegajo = 1000;
+    int seIngresoUnEmpleado= -1;
 		do {
 		mostrarMenu(&respuesta);
 
 		switch (respuesta) {
 
-		case 1: //AGREGAR ALUMNOS
+		case 1: //AGREGAR UN EMPLEADO
 
-			agregarAlumno( alumno, CANTIDADALUMNOS, &contadorDeLegajo );
-
-
-			//mostrarSiCargoBien(alumno, 1);
-			break;
-
-		case 2: // MOSTRAR ALUMNOS
-
-			mostrarTodosLosEstudiantes(alumno, CANTIDADALUMNOS);
-			break;
-
-		case 3: // BAJA / BORRAR ALUMNO
-
-			legajo = buscarLegajo(alumno, CANTIDADALUMNOS);
-			printf("------------  %d", legajo);
+			agregarEmpleado( empleado, CANTIDADEMPLEADOS, &contadorDeLegajo );
 
 			break;
+		case 2:  // MODIFICAR UN EMPLEADO
 
-		case 4:  // MODIFICAR UN ALUMNO
-			//modificarAlumno(alumno, CANTIDADALUMNOS );
+			seIngresoUnEmpleado = buscarLibre(empleado, CANTIDADEMPLEADOS);
+			if (seIngresoUnEmpleado > 0){
+				//modificarAlumno(alumno, CANTIDADALUMNOS );
+
+				printf("\n // MODIFICAR UN ALUMNO");
+			} else{
+
+				printf("\n Error, debe de ingresar al menos un empleado");
+			}
+
+			break;
+		case 3: // ELIMINAR UN EMPLEADO
+
+			seIngresoUnEmpleado = buscarLibre(empleado, CANTIDADEMPLEADOS);
+			if (seIngresoUnEmpleado > 0){
+
+			borrarElEmpleado(empleado, CANTIDADEMPLEADOS);
+
+			} else{
+
+				printf("\n Error, debe de ingresar al menos un empleado");
+			}
+
 			break;
 
-		case 5: // ORDENAR
+		case 4: // MOSTRAR ALUMNOS
+
+			seIngresoUnEmpleado = buscarLibre(empleado, CANTIDADEMPLEADOS);
+			if (seIngresoUnEmpleado > 0){
+			mostrarTodosLosEstudiantes(empleado, CANTIDADEMPLEADOS);
+
+			} else{
+
+				printf("\n Error, debe de ingresar al menos un empleado");
+			}
 			break;
 
-		case 6: // SALIR
+		case 5: // SALIR
 			break;
 
 
 		}
 
-	} while (respuesta != 6);
+	} while (respuesta != 5);
 
 	return EXIT_SUCCESS;
 };
 
 
-//INICIALIZACION
-int mostrarMenu(int *respuesta) {
-	int auxRespuesta;
-	printf(" \n          MENÚ ABM \n");
-	printf("1. ALTA     \n2. LISTAR      \n3. BAJA       \n4. MODIFICAR  "
-			" \n5. ORDENAR      \n6. SALIR\n");
 
-	utn_getNumero(&auxRespuesta, "\n\n  Ingrese una opcion \n","\nError, ingrese un numero del 1 al 6 \n\n", 1, 6,3);
-	*respuesta = auxRespuesta;
 
-	return 0;
-
-};
-
-int inicializarEstructura(datosPersonales array[], int tamano) {
+int inicializarEstructuraEmpleados(estructuraEmpleados array[], int tamano) {
 
 	int retorno = -1;
 	if (array != NULL) {
@@ -129,6 +126,7 @@ int inicializarEstructura(datosPersonales array[], int tamano) {
 	return retorno;
 };
 
+/*
 int mostrarSiCargoBien(datosPersonales array[], int tamano) {
 	int retorno = -1;
 	if (array != NULL) {
@@ -147,9 +145,9 @@ int mostrarSiCargoBien(datosPersonales array[], int tamano) {
 		}
 	}
 	return retorno;
-};
+};*/
 
-int buscarLibre(datosPersonales array[], int tamanoDeArray) {
+int buscarLibre(estructuraEmpleados array[], int tamanoDeArray) {
 	int retorno = -1;
 
 	if (array != NULL) {
@@ -165,33 +163,7 @@ int buscarLibre(datosPersonales array[], int tamanoDeArray) {
 
 
 // INGRESO - ALTA
-int utn_getNumero(int *resultado, char *mensaje, char *mensajeError, int minimo, int maximo, int reintentos) {
 
-	int retorno = -1;
-	int auxiliar; //variable auxiliar;
-	if (resultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos > 0) {
-		do{
-
-			printf("%s \n", mensaje);
-			fflush(stdin);
-			scanf("%d", &auxiliar);
-			if (auxiliar >= minimo && auxiliar <= maximo &&  !isdigit(auxiliar)) { // si devuelve != 0 cuando si entra
-
-				*resultado = auxiliar;
-				retorno = 0;
-				break;
-			} else {
-
-				printf("%s", mensajeError);
-
-				retorno = -1;
-				reintentos--;
-			};
-		}while(reintentos>=0);
-
-	}
-	return retorno;
-};
 
 int utn_getString(char auxiliar[], char *mensaje, char *mensajeError, int reintentos){
 	int retorno = -1;
@@ -249,6 +221,7 @@ void utn_getChar(char *variableChar, char *mensaje, char *mensajeError,int minim
 
 */
 
+/*
 int utn_getCharSexo(char *variableChar, char *mensaje, char *mensajeError, int reintentos){
 	int retorno = -1;
 	char bufferChar;
@@ -277,28 +250,28 @@ int utn_getCharSexo(char *variableChar, char *mensaje, char *mensajeError, int r
 	return retorno;
 
 }
+ * */
 
 
+//3-Listar
 
-//3-Listar     legajo;  * sexo; * edad; * nota1; * nota2; * promedio; * apellido[20]; * isEmpty;
-
-int mostrarUnEstudiante( datosPersonales unAlumno){
-	printf("        %d      %s       %c         %d        %d     %.2f    \n", unAlumno.legajo, unAlumno.apellido, unAlumno.sexo, unAlumno.nota1, unAlumno.nota2, unAlumno.promedio);
+int mostrarUnEstudiante( estructuraEmpleados unEmpleado){
+	printf("          %d      %s        %s        %.2f        %d      \n", unEmpleado.id, unEmpleado.nombre, unEmpleado.apellido , unEmpleado.salario, unEmpleado.sector);
 
 	return 0;
 
 }
 
-int mostrarTodosLosEstudiantes(datosPersonales array[], int tamano){
+int mostrarTodosLosEstudiantes(estructuraEmpleados array[], int tamano){
 	int retorno = -1;
 
 		if(array != NULL && array > 0){
-			printf(" ****************  DATOS PERSONALES DE ALUMNOS  ***************** \n ");
-			printf("        LEGAJO    APELLIDO        SEXO     NOTA1   NOTA2   PROMEDIO \n");
+			printf(" ****************  DATOS PERSONALES DE EMPLEADOS  ***************** \n ");
+			printf("        LEGAJO      NOMBRE      APELLIDO      SALARIO     SECTOR \n");
 
 			for(int i = 0; i < tamano ; i++){
 				if(array[i].isEmpty == 0){
-					printf(" %d", i);
+
 				mostrarUnEstudiante( array[i]);
 				}
 			}
@@ -309,7 +282,7 @@ int mostrarTodosLosEstudiantes(datosPersonales array[], int tamano){
 
 }
 
-
+/*
 int promediarNotas(float *promedio, int nota1, int nota2){
 
 	int retorno = -1;
@@ -323,12 +296,12 @@ int promediarNotas(float *promedio, int nota1, int nota2){
 	return retorno;
 }
 
+ * */
 
-//agregarAlumno( alumno, posicion )
-int agregarAlumno( datosPersonales   array[], int tamanoDeArray, int *contadorDeLegajo ){
+int agregarEmpleado( estructuraEmpleados   array[], int tamanoDeArray, int *contadorDeLegajo ){
 	int retorno = -1;
 	int posicion;
-	datosPersonales alumnoAuxiliar;
+	estructuraEmpleados empleadoAuxiliar;
 
 	if(array != NULL && tamanoDeArray > 0 && contadorDeLegajo != NULL)
 	{
@@ -338,19 +311,19 @@ int agregarAlumno( datosPersonales   array[], int tamanoDeArray, int *contadorDe
 			printf("\n No hay espacio disponible para cargar alumnos");
 		}else{
 
-			if (  (utn_getCharSexo(&alumnoAuxiliar.sexo,"Ingrese el sexo -f -m\n", "Error, intente nuevamente",3) == 0) &&
-				  (utn_getNumero(&alumnoAuxiliar.edad,"Ingrese la edad\n", "Error, ingrese la edad. Entre 18 y 80\n", 18, 80,3) == 0) &&
-				  (utn_getNumero(&alumnoAuxiliar.nota1,"Ingrese la nota1\n", "Error, ingrese la nota1. Entre 1 y 10\n", 0, 10,3) == 0) &&
-				  (utn_getNumero(&alumnoAuxiliar.nota2,"Ingrese la nota2\n", "Error, ingrese la nota2. Entre 1 y 10\n", 0, 10,3) == 0) &&
-				  (promediarNotas(&alumnoAuxiliar.promedio, alumnoAuxiliar.nota1, alumnoAuxiliar.nota2) == 0 ) &&
-				  (utn_getString(alumnoAuxiliar.apellido,"Ingrese el apellido \n", "Error intente nuevamente", 3) == 0) )
+			if (
+				  (utn_getString(empleadoAuxiliar.nombre,"\n Ingrese el nombre ", "\n Error intente nuevamente", 3) == 0) &&
+				  (utn_getString(empleadoAuxiliar.apellido,"\n Ingrese el apellido ", "\n Error intente nuevamente", 3) == 0) &&
+				  (utn_getFloat(&empleadoAuxiliar.salario,"\n Ingrese el salario (Entre 10000 y 80000)", "\n Error, ingrese la nota1. Entre 1 y 10", 10000, 80000,3) == 0) &&
+				  (utn_getNumero(&empleadoAuxiliar.sector,"\n Ingrese el sector al que pertenece \n    1- Ventas \n    2- RRHH \n    3- IT       ", "\n Error, ingrese la nota2. Entre 1 y 10", 0, 10,3) == 0)
+			   )
 					{
-					 alumnoAuxiliar.isEmpty = 0;
-					alumnoAuxiliar.legajo= *contadorDeLegajo;
-					array[posicion] = alumnoAuxiliar;
-					(*contadorDeLegajo)++; //Aumenta el lejago en 1, inicializado en 1
+					empleadoAuxiliar.isEmpty = 0;
+					empleadoAuxiliar.id= *contadorDeLegajo;
+					array[posicion] = empleadoAuxiliar;
+					(*contadorDeLegajo)++; //Aumenta el lejago en 1, inicializado en 1000
 
-					printf("Funcionó");
+					printf("\n *** Empleado guardado *** \n");
 					retorno = 0;
 				}
 		}
@@ -360,7 +333,7 @@ int agregarAlumno( datosPersonales   array[], int tamanoDeArray, int *contadorDe
 }
 
 
-int buscarLegajo(datosPersonales array[], int tamanoDeArray)
+int buscarLegajo(estructuraEmpleados array[], int tamanoDeArray)
 
 {
 	int retorno = -1;
@@ -368,17 +341,20 @@ int buscarLegajo(datosPersonales array[], int tamanoDeArray)
 	if(array!=NULL && tamanoDeArray>0)
 	{
 		mostrarTodosLosEstudiantes(array, tamanoDeArray);
-		printf("Ingrese un legajo \n");
+		printf("\n Ingrese un legajo   ");
 		scanf("%d", &legajoAuxiliar);
 
 		for(int i=0; i<tamanoDeArray; i++) //itera en el array pasado por parametro
 		{
-			if(array[i].legajo==legajoAuxiliar && array[i].isEmpty==0) //revisa si existe y si está ocupado
+			if(array[i].id==legajoAuxiliar ) //revisa si existe
 			{
-				scanf(" El legajo '%d' ha sido encontrado  \n", &legajoAuxiliar);
-				retorno = i;
+				if(array[i].isEmpty==0){ // y si está ocupado
 
-				break;
+					printf(" El legajo '%d' ha sido encontrado  \n", legajoAuxiliar);
+					retorno = i;
+
+					break;
+				}
 			}
 			else
 			{
@@ -386,15 +362,37 @@ int buscarLegajo(datosPersonales array[], int tamanoDeArray)
 				break;
 			}
 		}// fin for
-		printf("printf fentro de funcion %d", retorno);
+
 	}
 	return retorno;
 }
+int borrarElEmpleado(estructuraEmpleados array[], int tamano) {
 
+	int retorno = -1;
+	int posicion = -1;
+	char respuesta;
 
+	posicion = buscarLegajo(array, tamano);
+
+	if (array != NULL ) {
+		printf("\nDesea borrar este legajo? \n");
+		printf("\n ****************  DATOS PERSONALES DE EMPLEADOS  *****************  ");
+		printf("\n        LEGAJO      NOMBRE      APELLIDO      SALARIO     SECTOR ");
+		mostrarUnEstudiante( array[posicion]);
+		printf("\n ingrese 's' para dar de baja.");
+		fflush(stdin);
+		scanf("%c", &respuesta);
+		if(respuesta=='s'){
+			array[posicion].isEmpty = 1; // Pone el campo isEmpty array en 1, es decir que está libre.
+			retorno = 0;
+			printf("\n *** Empleado dado de baja *** \n");
+		}
+	}
+	return retorno;
+};
 
 //case 4
-int modificarAlumno( datosPersonales   array[], int tamanoDeArray, int posicion){
+int modificarAlumno( estructuraEmpleados   array[], int tamanoDeArray, int posicion){
 	int retorno = -1;
 	int legajoAuxiliar;
 	mostrarTodosLosEstudiantes(array, tamanoDeArray);
@@ -403,7 +401,7 @@ int modificarAlumno( datosPersonales   array[], int tamanoDeArray, int posicion)
 	scanf("%d", &legajoAuxiliar);
 	for( int i = 0; i<tamanoDeArray ; i++ )
 	{
-		if(array[i].legajo == legajoAuxiliar ){
+		if(array[i].id == legajoAuxiliar ){
 			mostrarUnEstudiante(array[i]);
 		}
 
