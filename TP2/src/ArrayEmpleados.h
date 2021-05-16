@@ -40,7 +40,7 @@ int obtenerSector(int numeroDeSector, char nombreDeSector[]);
 
 void ordenarApellidosYSector(estructuraEmpleados array[], int tamano, int tipoDeOrden);
 
-//int seleccionarInforme(estructuraEmpleados array[], int tamano);
+int seleccionarInforme(estructuraEmpleados array[], int tamano);
 //int mostrarSiCargoBien(estructuraEmpleados array[], int tamano);
 
 

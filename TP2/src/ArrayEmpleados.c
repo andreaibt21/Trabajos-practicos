@@ -317,12 +317,11 @@ void ordenarApellidosYSector(estructuraEmpleados array[], int tamano, int tipoDe
 
 	}};
 
-/*
 int seleccionarInforme(estructuraEmpleados array[], int tamano){
 	int opcionDeInforme = 0;
 	int retorno = 1;
-	printf(" ****************  SELECCIONE EL TIPO DE INFORME A MOSTRAR ***************** \n ");
-	utn_getNumero(&opcionDeInforme,"\n 1- alfabéticamente por apellido y sector ascendente \n    2- alfabéticamente por Apellido y sector descendente    \n    3-    Total y promedio de los salarios,       ", "\n Error, intente nuevamente", 1, 3,3);
+	printf("\n ****************  SELECCIONE EL TIPO DE INFORME A MOSTRAR ***************** \n ");
+	utn_getNumero(&opcionDeInforme,"\n 1-    alfabéticamente por apellido y sector ascendente \n    2-    alfabéticamente por Apellido y sector descendente    \n    3-    Total y promedio de los salarios,       ", "\n Error, intente nuevamente", 1, 3,3);
 
 	switch (opcionDeInforme) {
 		case 1:
@@ -348,7 +347,6 @@ int seleccionarInforme(estructuraEmpleados array[], int tamano){
 }
 
 
-*/
 /*
 int mostrarSiCargoBien(estructuraEmpleados array[], int tamano) {
 	int retorno = -1;

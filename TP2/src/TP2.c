@@ -93,7 +93,7 @@ int main(void) {
 			if (seIngresoUnEmpleado > 0){
 				mostrarTodosLosEmpleados(empleado, CANTIDADEMPLEADOS);
 
-			//seleccionarInforme(empleado, CANTIDADEMPLEADOS, &opcionDeInforme);
+			seleccionarInforme(empleado, CANTIDADEMPLEADOS);
 
 			} else{
 
