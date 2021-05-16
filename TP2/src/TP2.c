@@ -91,6 +91,8 @@ int main(void) {
 
 			seIngresoUnEmpleado = buscarLibre(empleado, CANTIDADEMPLEADOS);
 			if (seIngresoUnEmpleado > 0){
+				mostrarTodosLosEmpleados(empleado, CANTIDADEMPLEADOS);
+
 			//seleccionarInforme(empleado, CANTIDADEMPLEADOS, &opcionDeInforme);
 
 			} else{
