@@ -45,6 +45,7 @@ int main(void) {
 	int respuesta = 0;
     int contadorDeLegajo = 1000;
     int seIngresoUnEmpleado= -1;
+
    // int opcionDeInforme = -1;
 
 	estructuraEmpleados empleado[CANTIDADEMPLEADOS];

@@ -116,6 +116,7 @@ int agregarUnEmpleado( estructuraEmpleados   array[], int tamanoDeArray, int *co
 	}
 	return retorno;
 }
+
 int buscarLegajo(estructuraEmpleados array[], int tamanoDeArray)
 
 {
@@ -177,10 +178,12 @@ int buscarLibre(estructuraEmpleados array[], int tamanoDeArray) {
 
 	if (array != NULL) {
 		for (int i = 0; i < tamanoDeArray; i++) {
+
 			if (array[i].isEmpty == 1) {
 				retorno = i;
 				break; //si encontré una posicion libre rompo el for
 			};
+
 		};
 	};
 	return retorno;
@@ -246,7 +249,6 @@ int obtenerSector(int numeroDeSector, char nombreDeSector[]){
 		}
 	return retorno;
 };
-
 
 /*
  * INFORMAR:
@@ -321,7 +323,7 @@ int seleccionarInforme(estructuraEmpleados array[], int tamano){
 	int opcionDeInforme = 0;
 	int retorno = 1;
 	printf("\n ****************  SELECCIONE EL TIPO DE INFORME A MOSTRAR ***************** \n ");
-	utn_getNumero(&opcionDeInforme,"\n 1-    alfabéticamente por apellido y sector ascendente \n    2-    alfabéticamente por Apellido y sector descendente    \n    3-    Total y promedio de los salarios,       ", "\n Error, intente nuevamente", 1, 3,3);
+	utn_getNumero(&opcionDeInforme,"\n    1-    alfabéticamente por apellido y sector ascendente \n    2-    alfabéticamente por Apellido y sector descendente    \n    3-    Total y promedio de los salarios,       ", "\n Error, intente nuevamente", 1, 3,3);
 
 	switch (opcionDeInforme) {
 		case 1:
