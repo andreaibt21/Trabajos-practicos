@@ -1,5 +1,7 @@
+AbstractTextEditor.Color.Background.SystemDefault=false
+AbstractTextEditor.Color.SelectionBackground.SystemDefault=false
+AbstractTextEditor.Color.SelectionForeground.SystemDefault=false
 eclipse.preferences.version=1
 highlight.text.style=NONE
-org.eclipse.cdt.ui.occurrenceIndicationColor=255,255,0
 thcoverage_stylePreferences=NONE
 thcoverage_text=false

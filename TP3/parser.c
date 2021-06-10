@@ -59,6 +59,7 @@ int parser_EmployeeFromBinary(FILE* pointerFile , LinkedList* pointerArrayListEm
 				if (pointerAuxEmpleado != NULL ) {
 
 					if(retornoLeido != 0){
+
 						employee_setId(pointerAuxEmpleado, auxiliarEmployee.id);
 						employee_setNombre(pointerAuxEmpleado, auxiliarEmployee.nombre);
 						employee_setHorasTrabajadas(pointerAuxEmpleado, auxiliarEmployee.horasTrabajadas);

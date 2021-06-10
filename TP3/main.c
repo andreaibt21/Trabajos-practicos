@@ -42,11 +42,27 @@ int main()
                 ;
                 break;
 			case 2:
-				//lo abri primero en texto pero lo guarde en binario primero !!!!!
+
 				controller_loadFromBinary("data.bin",listaEmpleados);
 				 printf("\n22");
 				break;
 			case 3:
+
+
+				/* alta 10 empleado
+				 * ya hay datos ingresados -- lo quiere guardar?? y resguardar en
+				 * segundo archivo backup.csv
+				 *
+				 *
+				 * el máximo id lo guardas en alguna parte y lo va sobre escribiendo
+				 * dar alta primero
+				 * ya habia daatos quieres guardarlos validar el id
+				 *
+				 *
+				 * Chequeo si existe el legago, si  si no lo levanto
+				 *
+				 *
+				 * */
 				 printf("\n33");
 				break;
 			case 4:
@@ -82,10 +98,3 @@ int main()
     }while(respuesta != 10);
     return EXIT_SUCCESS;
 }
-
-/*
- * agrega la lista
- *
- *
- *
- */

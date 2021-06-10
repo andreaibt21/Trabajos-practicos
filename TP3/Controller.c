@@ -17,7 +17,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
 	if (path != NULL && pointerArrayListEmployee != NULL){
 		FILE *pointerFile=fopen(path,"r");
 		parser_EmployeeFromText(pointerFile, pointerArrayListEmployee);
-		fclose(pointerFile);
+		fclose(pointerFile);   //le falta varias validaciones a esta funcion
 		retorno = 0;
 	};
     return retorno;
@@ -37,7 +37,7 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee)
 		if (path != NULL && pointerArrayListEmployee != NULL){
 			FILE *pointerFile=fopen(path,"rb");
 			parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee);
-			fclose(pointerFile);
+			fclose(pointerFile); //le falta varias validaciones a esta funcion
 			retorno = 0;
 		};
 	    return retorno;
@@ -50,9 +50,20 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee)
  * \return int
  *
  */
-int controller_addEmployee(LinkedList* pointerArrayListEmployee)
-{
-    return 1;
+int controller_addEmployee(LinkedList* pointerArrayListEmployee){
+    int retorno = -1;
+    Employee *auxiliarEmployee = employee_new();
+
+    		if (pointerArrayListEmployee != NULL){
+
+
+    		}
+
+
+
+
+
+	return 0;
 }
 
 /** \brief Modificar datos de empleado
