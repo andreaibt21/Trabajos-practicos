@@ -14,12 +14,14 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 	Employee* auxiliarEmployee = employee_new();
 
 	if( idStr != NULL && nombreStr != NULL &&  horasTrabajadasStr != NULL && sueldoStr != NULL){
-			if( (employee_setId( auxiliarEmployee, atoi(idStr) )  !=0) ||
-				(employee_setNombre( auxiliarEmployee, nombreStr) !=0) ||
-				(employee_setHorasTrabajadas( auxiliarEmployee, atoi(horasTrabajadasStr) ) !=0) ||
-				(employee_setSueldo( auxiliarEmployee, atoi(sueldoStr) ) !=0) ){
-					free(auxiliarEmployee);
+			if( (employee_setId( auxiliarEmployee, atoi(idStr) )  ==0) &&
+				(employee_setNombre( auxiliarEmployee, nombreStr) ==0) &&
+				(employee_setHorasTrabajadas( auxiliarEmployee, atoi(horasTrabajadasStr) ) ==0) &&
+				(employee_setSueldo( auxiliarEmployee, atoi(sueldoStr) ) ==0) ){
+
+				}else{
 					auxiliarEmployee=NULL;
+
 				}
 	}
 	return auxiliarEmployee;

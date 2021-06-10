@@ -77,18 +77,18 @@ int utn_getFloat(float *resultado, char *mensaje, char *mensajeError, int minimo
 
 int mostrarMenu(int *respuesta) {
 	int auxRespuesta;
-	printf(" \n ____________________________________MENÚ_______________________________________");
-	printf( "\n |                                 												  |"
+	printf(" \n ____________________________________MENÚ___________________________________________");
+	printf( "\n |                                                                                 |"
 			"\n |   1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).  |"
 			"\n |   2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).|"
-			"\n |   3. Alta de empleado      													  |"
-			"\n |   4. Modificar datos de empleado  				   			                  |"
-			"\n |   5. Baja de empleado        											          |"
-			"\n |   6. Listar empleados 											 			  |"
-			"\n |   7. Ordenar empleados           											      |"
+			"\n |   3. Alta de empleado                                                           |"
+			"\n |   4. Modificar datos de empleado           	                                  |"
+			"\n |   5. Baja de empleado                                                           |"
+			"\n |   6. Listar empleados                                                           |"
+			"\n |   7. Ordenar empleados            	                                          |"
 			"\n |   8. Guardar los datos de los empleados en el archivo data.csv (modo texto).    |"
 			"\n |   9. Guardar los datos de los empleados en el archivo data.csv (modo binario).  |"
-			"\n |  10. SALIR                      											      |"
+			"\n |  10. SALIR                                                                      |"
 			"\n |_________________________________________________________________________________|\n"
 			);
 

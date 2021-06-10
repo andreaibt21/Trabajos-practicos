@@ -33,12 +33,17 @@ int main()
 
         switch(respuesta) {
             case 1:
+            	if(controller_loadFromText("data.csv",listaEmpleados)){
+            		printf("Error, intente nuevamente");
+            	}else{
+            		printf("Todo ok");
+            	}
 
-                controller_loadFromText("data.csv",listaEmpleados);
+                ;
                 break;
 			case 2:
-
-				controller_loadFromBinary("data.csv",listaEmpleados);
+				//lo abri primero en texto pero lo guarde en binario primero !!!!!
+				controller_loadFromBinary("data.bin",listaEmpleados);
 				 printf("\n22");
 				break;
 			case 3:
@@ -59,13 +64,13 @@ int main()
 				printf("\n77");
 				break;
 			case 8:
-				controller_saveAsText("data.bin",listaEmpleados);
+				controller_saveAsText("data.csv",listaEmpleados);
 
 				printf("\n88");
 				break;
 			case 9:
 				controller_saveAsBinary("data.bin",listaEmpleados);
-
+				//controlar que primero lo abriste en texto
 
 				printf("\n99");
 				break;
@@ -78,3 +83,9 @@ int main()
     return EXIT_SUCCESS;
 }
 
+/*
+ * agrega la lista
+ *
+ *
+ *
+ */

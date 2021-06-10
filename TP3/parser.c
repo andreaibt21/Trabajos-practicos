@@ -16,29 +16,24 @@ int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListEmpl
 
 	Employee* pointerAuxEmpleado=NULL;
 
-	if(pointerFile!=NULL && pointerArrayListEmployee!=NULL){
+	if(pointerFile != NULL && pointerArrayListEmployee != NULL){
 		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
 		printf("%s   %s    %s    %s\n\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-
+//*(buffer+x)
 
 	while( !feof(pointerFile) ){
-			int readAll;
-			readAll = fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
+		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
+		pointerAuxEmpleado = employee_newParametros(buffer[0],buffer[1],buffer[2],buffer[3]);
 
-			if (readAll < 4){
-				employee_delete(pointerAuxEmpleado);
-				break;
-			}else{
-				pointerAuxEmpleado = employee_newParametros(buffer[0],buffer[1],buffer[2],buffer[3]);
-				if(pointerAuxEmpleado!=NULL){
-					ll_add(pointerArrayListEmployee,pointerAuxEmpleado);
-					retorno=0;
-				};
-			};
-		};
+		if(pointerAuxEmpleado != NULL){
+			ll_add(pointerArrayListEmployee,pointerAuxEmpleado); //Agrego cada empleado de la lista a la linkedlist
+			retorno=0;
+		}
+
+
 	};
 
-
+	};
   	 return retorno;
 }
 
@@ -49,8 +44,34 @@ int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListEmpl
  * \return int
  *
  */
-int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pointerArrayListEmployee)
-{
+int parser_EmployeeFromBinary(FILE* pointerFile , LinkedList* pointerArrayListEmployee)
+{	int retorno;
+	int retornoLeido;
+	Employee* pointerAuxEmpleado=NULL;
+	Employee auxiliarEmployee;
 
-    return 1;
+		if(pointerFile!=NULL && pointerArrayListEmployee!=NULL){
+
+			while( !feof(pointerFile) ){
+
+				retornoLeido = fread(&auxiliarEmployee,sizeof(Employee),1,pointerFile);
+				pointerAuxEmpleado = employee_new();
+				if (pointerAuxEmpleado != NULL ) {
+
+					if(retornoLeido != 0){
+						employee_setId(pointerAuxEmpleado, auxiliarEmployee.id);
+						employee_setNombre(pointerAuxEmpleado, auxiliarEmployee.nombre);
+						employee_setHorasTrabajadas(pointerAuxEmpleado, auxiliarEmployee.horasTrabajadas);
+						employee_setSueldo(pointerAuxEmpleado, auxiliarEmployee.horasTrabajadas);
+
+						ll_add(pointerArrayListEmployee, pointerAuxEmpleado);
+					retorno = 0;
+
+				}
+
+				}
+			}
+		}
+
+    return retorno;
 }

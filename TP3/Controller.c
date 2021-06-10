@@ -11,10 +11,9 @@
  * \return int
  *
  */
-int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee)
-{
+int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
+	ll_clear(pointerArrayListEmployee);
 	int retorno = -1;
-
 	if (path != NULL && pointerArrayListEmployee != NULL){
 		FILE *pointerFile=fopen(path,"r");
 		parser_EmployeeFromText(pointerFile, pointerArrayListEmployee);
@@ -31,13 +30,13 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee)
  * \return int
  *
  */
-int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee)
-{
+int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee){
+	ll_clear(pointerArrayListEmployee);
 	int retorno = -1;
 
 		if (path != NULL && pointerArrayListEmployee != NULL){
 			FILE *pointerFile=fopen(path,"rb");
-			parser_EmployeeFromText(pointerFile, pointerArrayListEmployee);
+			parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee);
 			fclose(pointerFile);
 			retorno = 0;
 		};
@@ -96,16 +95,21 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
 	int auxiliarSueldo;
 
 	int lenghtEmployees = ll_len(pointerArrayListEmployee);
-	if (pointerArrayListEmployee != NULL){
+	if (pointerArrayListEmployee != NULL && lenghtEmployees > 0){
 
 		for(int i = 0; i < lenghtEmployees; i++ ){
-		Employee*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
+			Employee*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
+
+			employee_getId( auxiliarEmployee, &auxiliarId);
+			employee_getNombre(auxiliarEmployee, auxiliarNombre);
+			employee_getHorasTrabajadas(auxiliarEmployee, &auxiliarHorasTrabajadas);
+			employee_getSueldo(auxiliarEmployee, &auxiliarSueldo);
 
 
-			printf( "%d , %s, %d, %d",employee_getId(auxiliarEmployee, &auxiliarId),
-									  employee_getNombre(auxiliarEmployee, auxiliarNombre),
-									  employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas),
-									  employee_getSueldo(auxiliarEmployee, &auxiliarSueldo));
+			printf( "\n%d , %s, %d, %d ", auxiliarId,
+									   auxiliarNombre,
+									   auxiliarHorasTrabajadas,
+									   auxiliarSueldo);
 		};
 		retorno = 0;
 	};
@@ -135,15 +139,39 @@ int controller_sortEmployee(LinkedList* pointerArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 {
+	int  auxiliarId;
+	char auxiliarNombre[200];
+	int auxiliarHorasTrabajadas;
+	int auxiliarSueldo;
 	int retorno = -1;
+	//int ll_isEmpty(LinkedList* this); cero si no esta vacia, tiene algo
 
-	if (path != NULL && pointerArrayListEmployee != NULL){
-	//	FILE *pFile=fopen(path,"w");
+	if(ll_isEmpty(pointerArrayListEmployee) == 0){
+	FILE *pointerFile=fopen(path,"w");
+		if (path != NULL && pointerArrayListEmployee != NULL && pointerFile != NULL){
+			fprintf( pointerFile,"id,    nombre,    horasTrabajadas,    sueldo\n");
+			for(int i = 0; i < ll_len(pointerArrayListEmployee); i++){
 
+				Employee  *auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+				if(employee_getId( auxiliarEmployee, &auxiliarId) == 0 &&
+				employee_getNombre(auxiliarEmployee, auxiliarNombre) == 0 &&
+				employee_getHorasTrabajadas(auxiliarEmployee, &auxiliarHorasTrabajadas) == 0 &&
+				employee_getSueldo(auxiliarEmployee, &auxiliarSueldo) == 0 ){
+				fprintf( pointerFile,"%d, %s, %d, %d\n", auxiliarId,
+														 auxiliarNombre,
+													     auxiliarHorasTrabajadas,
+														 auxiliarSueldo);
+				}
+			}
 
+			fclose(pointerFile);
+			retorno = 0;
+		};
+	}else{
+		printf("Error, No hay datos para guardar");
 
-		retorno = 0;
-	};
+	}
+
 	return retorno;
 
 
@@ -159,17 +187,34 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee)
 {
 	int retorno = -1;
-	/*
-	Employee* auxiliarEmployee;
-	int validacion;
-	if (path != NULL && pointerArrayListEmployee != NULL){
-		FILE *pointerFile=fopen(path,"wb");
+	int cantidadEscrita;
 
-	/	validacion = fwrite(auxiliarEmployee, sizeof(Employee),1, pointerFile);
+	if(ll_isEmpty(pointerArrayListEmployee) == 0){
+		if (path != NULL && pointerArrayListEmployee != NULL){
+			FILE *pointerFile=fopen(path,"wb");
 
+			int lenghtEmployees = ll_len(pointerArrayListEmployee);
 
-		retorno = 0;
-	};*/
+			for(int i = 0; i < lenghtEmployees; i++ ){
+
+				Employee*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
+				if(pointerFile != NULL){
+					cantidadEscrita = fwrite(auxiliarEmployee, sizeof(Employee),1, pointerFile);
+				};
+			}
+			if (cantidadEscrita < 1){
+			printf("\nError al escribir el archivo");
+
+			}
+
+			fclose(pointerFile);
+
+			retorno = 0;
+		};
+	}else{
+		printf("Error, No hay datos para guardar");
+
+	}
 	return retorno;
 }
 
