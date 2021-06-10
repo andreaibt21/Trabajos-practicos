@@ -3,8 +3,8 @@
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Employee.h"
+#include "parser.h"
 #include "utn.h"
-
 /****************************************************
     Menu:
      1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
@@ -27,16 +27,18 @@ int main()
     int respuesta = 0;
     printf("\nfuncinoa");
 
-  //  LinkedList* listaEmpleados = ll_newLinkedList();
+   LinkedList* listaEmpleados = ll_newLinkedList();
     do{
     	mostrarMenu(&respuesta);
 
         switch(respuesta) {
             case 1:
-            	 printf("\nfuncgvhgvhginoa");
-             //   controller_loadFromText("data.csv",listaEmpleados);
+
+                controller_loadFromText("data.csv",listaEmpleados);
                 break;
 			case 2:
+
+				controller_loadFromBinary("data.csv",listaEmpleados);
 				 printf("\n22");
 				break;
 			case 3:
@@ -50,14 +52,21 @@ int main()
 				break;
 			case 6:
 				printf("\n66");
+				controller_ListEmployee(listaEmpleados);
+
 				break;
 			case 7:
 				printf("\n77");
 				break;
 			case 8:
+				controller_saveAsText("data.bin",listaEmpleados);
+
 				printf("\n88");
 				break;
 			case 9:
+				controller_saveAsBinary("data.bin",listaEmpleados);
+
+
 				printf("\n99");
 				break;
 			case 10:

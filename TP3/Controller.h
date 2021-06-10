@@ -1,11 +1,14 @@
-int controller_loadFromText(char* path , LinkedList* pArrayListEmployee);
-int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee);
-int controller_addEmployee(LinkedList* pArrayListEmployee);
-int controller_editEmployee(LinkedList* pArrayListEmployee);
-int controller_removeEmployee(LinkedList* pArrayListEmployee);
-int controller_ListEmployee(LinkedList* pArrayListEmployee);
-int controller_sortEmployee(LinkedList* pArrayListEmployee);
-int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
-int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
+
+
+
+int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee);
+int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee);
+int controller_addEmployee(LinkedList* pointerArrayListEmployee);
+int controller_editEmployee(LinkedList* pointerArrayListEmployee);
+int controller_removeEmployee(LinkedList* pointerArrayListEmployee);
+int controller_ListEmployee(LinkedList* pointerArrayListEmployee);
+int controller_sortEmployee(LinkedList* pointerArrayListEmployee);
+int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee);
+int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee);
 
 
