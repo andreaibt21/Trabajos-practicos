@@ -23,7 +23,7 @@ int utn_getNumero(int *resultado, char *mensaje, char *mensajeError, int minimo,
 
 	int retorno = -1;
 	int auxiliar; //variable auxiliar;
-	if (resultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos > 0) {
+	if (resultado != NULL && mensaje != NULL && mensajeError != NULL && minimo < maximo && reintentos > 0) {
 		do{
 
 			printf("%s", mensaje);
@@ -51,7 +51,7 @@ int utn_getFloat(float *resultado, char *mensaje, char *mensajeError, int minimo
 
 	int retorno = -1;
 	float auxiliar; //variable auxiliar;
-	if (resultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos > 0) {
+	if (resultado != NULL && mensaje != NULL && mensajeError != NULL && minimo < maximo && reintentos > 0) {
 		do{
 
 			printf("%s", mensaje);

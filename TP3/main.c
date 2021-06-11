@@ -47,7 +47,7 @@ int main()
 				 printf("\n22");
 				break;
 			case 3:
-
+				controller_addEmployee(listaEmpleados);
 
 				/* alta 10 empleado
 				 * ya hay datos ingresados -- lo quiere guardar?? y resguardar en
