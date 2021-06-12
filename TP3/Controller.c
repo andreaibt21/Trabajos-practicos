@@ -55,21 +55,33 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
     int retorno = -1;
     Employee *auxiliarEmployee = NULL;
     int  auxiliarId = 0;
+	int idMaximo;
 	char auxiliarNombre[200];
 	int auxiliarHorasTrabajadas;
 	int auxiliarSueldo;
-
+	int cantidadEmployees;
 
     		if (pointerArrayListEmployee != NULL){
 
-
+    			printf("is empty de ll ?  %d",ll_isEmpty(pointerArrayListEmployee));
     				printf("\n    ---------------- Alta de un empleado nuevo ------------- \n");
     				if (  (utn_getString(auxiliarNombre,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
-					      (utn_getNumero(&auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas  ", "\n Error, intente nuevamente", 0, 500,3) == 0) &&
-					      (utn_getNumero(&auxiliarSueldo,"\n Ingrese el sueldo  ", "\n Error, intente nuevamente", 1, 90000,3) == 0)
+					      (utn_getNumero(&auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas (Entre 0 y 500) ", "\n Error, intente nuevamente", 0, 500,3) == 0) &&
+					      (utn_getNumero(&auxiliarSueldo,"\n Ingrese el sueldo (Entre 1 y 90000) ", "\n Error, intente nuevamente", 1, 90000,3) == 0)
 				       ){
+    					if( ll_isEmpty(pointerArrayListEmployee) == 0){
 
-    					auxiliarId++;   //ARREGLAR EL AUTOINCREMENTAL, SIEMPRE MANDA 1
+							cantidadEmployees = ll_len(pointerArrayListEmployee);
+							for(int i=0; i<cantidadEmployees ; i++){
+								auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+								employee_getId(auxiliarEmployee, &idMaximo);
+								if( idMaximo > auxiliarId ){
+									employee_getId(auxiliarEmployee,&auxiliarId);
+
+								};
+							};
+    					};
+    					auxiliarId++;
     					auxiliarEmployee = employee_new();
     					if(   (employee_setId(auxiliarEmployee, auxiliarId) == 0) &&
   							  (employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) &&
@@ -81,11 +93,8 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
 							printf("\nEl empleado cargado es: \n");
     						employee_printfOne(auxiliarEmployee);
 							retorno=0;
-    					}
-
-
+    					};
     				};
-
     		};
 	return retorno;
 }
@@ -107,16 +116,63 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 	int auxiliarHorasTrabajadas;
 	int auxiliarSueldo;
 	int datoACambiar;
+	int idEmployeeACambiar;
+	int cantidadEmployees;
+	int idMaximo;
+	if(ll_isEmpty(pointerArrayListEmployee) == 0){
+
 
 		if (pointerArrayListEmployee != NULL){
 
 			printf("\n    ---------------- Modificación de un empleado nuevo ------------- \n");
-		    	controller_ListEmployee(pointerArrayListEmployee);
 
-		    	utn_getNumero(&datoACambiar, "\n Ingrese una opcion del 1 al 3 \n1- modificar nombre \n2- modificar horas trabajadas \n3- modificar salario ", "\n Error, ingrese nuevamente", 1, 3, 3);
+
+				cantidadEmployees = ll_len(pointerArrayListEmployee);
+				for(int i=0; i<cantidadEmployees ; i++){
+					auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+					employee_getId(auxiliarEmployee, &idMaximo);
+					if( idMaximo > auxiliarId ){
+						employee_getId(auxiliarEmployee,&auxiliarId);
+
+					};
+				};
+				printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
+		    	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a cambiar", "\nError, intente nuevamente",  1, idMaximo, 3);
+
+
+		    		for (int i = 0; i < cantidadEmployees; i++) {
+		    			auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+		    			employee_getId(auxiliarEmployee, &auxiliarId);
+
+		    			if (idEmployeeACambiar == auxiliarId) {
+		    				break;
+		    			}
+		    		}
+		    		/*
+
+		    //	utn_getNumero(&datoACambiar, "\n Ingrese una opcion del 1 al 3 \n1- modificar nombre \n2- modificar horas trabajadas \n3- modificar salario, \n4-  Volver al menú anterior", "\n Error, ingrese nuevamente", 1, 3, 3);
 
 		    	 //AACA QUEDAMOS WEY
 		    	 //
+
+		    	switch (datoACambiar) {
+					case 1:
+
+						break;
+					case 2:
+
+						break;
+					case 3:
+
+					break;
+					case 4:
+
+					break;
+				}
+
+
+
+
 
 				if (  (utn_getString(auxiliarNombre,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
 					  (utn_getNumero(&auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas  ", "\n Error, intente nuevamente", 0, 500,3) == 0) &&
@@ -140,9 +196,14 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 					}
 
 
-				};
+				};*/
 
 		};
+	}else{
+		printf("No hay empleados cargados");
+
+	}
+
 	return retorno;
 }
 
@@ -175,6 +236,8 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
 
 	int lenghtEmployees = ll_len(pointerArrayListEmployee);
 	if (pointerArrayListEmployee != NULL && lenghtEmployees > 0){
+		printf("\n  ****************  DATOS PERSONALES DE EMPLEADOS  ***************** ");
+
 
 		for(int i = 0; i < lenghtEmployees; i++ ){
 			Employee*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
@@ -184,11 +247,11 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
 			employee_getHorasTrabajadas(auxiliarEmployee, &auxiliarHorasTrabajadas);
 			employee_getSueldo(auxiliarEmployee, &auxiliarSueldo);
 
-
-			printf( "\n%d , %s, %d, %d ", auxiliarId,
-									   auxiliarNombre,
-									   auxiliarHorasTrabajadas,
-									   auxiliarSueldo);
+			printf("\n %d.  Empleado: %s,     Horas trabajadas: %d,      Sueldo: $%d ",
+																	   auxiliarId,
+																	   auxiliarNombre,
+																	   auxiliarHorasTrabajadas,
+																	   auxiliarSueldo);
 		};
 		retorno = 0;
 	};

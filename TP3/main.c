@@ -44,29 +44,14 @@ int main()
 			case 2:
 
 				controller_loadFromBinary("data.bin",listaEmpleados);
-				 printf("\n22");
+
 				break;
 			case 3:
 				controller_addEmployee(listaEmpleados);
 
-				/* alta 10 empleado
-				 * ya hay datos ingresados -- lo quiere guardar?? y resguardar en
-				 * segundo archivo backup.csv
-				 *
-				 *
-				 * el máximo id lo guardas en alguna parte y lo va sobre escribiendo
-				 * dar alta primero
-				 * ya habia daatos quieres guardarlos validar el id
-				 *
-				 *
-				 * Chequeo si existe el legago, si  si no lo levanto
-				 *
-				 *
-				 * */
-				 printf("\n33");
 				break;
 			case 4:
-				 printf("\n44");
+				controller_editEmployee(listaEmpleados);
 				break;
 			case 5:
 				printf("\n55");

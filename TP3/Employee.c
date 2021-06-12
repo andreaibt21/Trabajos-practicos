@@ -110,8 +110,8 @@ int employee_getSueldo(Employee* this,int* sueldo){
 }
 
 void employee_printfOne(Employee* this){
-
-	printf("\n %d.  Empleado:  %s, Horas trabajadas: %d, Sueldo: $%d ",
+	printf("\n  ****************  DATOS PERSONALES DEL EMPLEADO  ***************** ");
+	printf("\n %d.  Empleado: %s,     Horas trabajadas: %d,      Sueldo: $%d ",
 			(*(this)).id,
 			(*(this)).nombre,
 			(*(this)).horasTrabajadas,
