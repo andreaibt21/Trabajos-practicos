@@ -71,18 +71,26 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
 				       ){
     					if( ll_isEmpty(pointerArrayListEmployee) == 0){
 
-							cantidadEmployees = ll_len(pointerArrayListEmployee);
+    						cantidadEmployees = ll_len(pointerArrayListEmployee);
+
 							for(int i=0; i<cantidadEmployees ; i++){
-								auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+
+								auxiliarEmployee = (Employee*)ll_get(pointerArrayListEmployee, i);
 								employee_getId(auxiliarEmployee, &idMaximo);
-								if( idMaximo > auxiliarId ){
-									employee_getId(auxiliarEmployee,&auxiliarId);
+
+								if(  auxiliarId>idMaximo ){
+
+									idMaximo = auxiliarId;
+
 
 								};
 							};
     					};
-    					auxiliarId++;
+    					printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
+    					idMaximo++;
+    					printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
     					auxiliarEmployee = employee_new();
+
     					if(   (employee_setId(auxiliarEmployee, auxiliarId) == 0) &&
   							  (employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) &&
 							  (employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) &&
@@ -119,86 +127,78 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 	int idEmployeeACambiar;
 	int cantidadEmployees;
 	int idMaximo;
-	if(ll_isEmpty(pointerArrayListEmployee) == 0){
+	if(ll_isEmpty(pointerArrayListEmployee) == 0 && pointerArrayListEmployee != NULL){
 
-
-		if (pointerArrayListEmployee != NULL){
-
-			printf("\n    ---------------- Modificación de un empleado nuevo ------------- \n");
+			printf("\n    ---------------- Modificación de un empleado ------------- \n");
 
 
 				cantidadEmployees = ll_len(pointerArrayListEmployee);
 				for(int i=0; i<cantidadEmployees ; i++){
 					auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
 					employee_getId(auxiliarEmployee, &idMaximo);
-					if( idMaximo > auxiliarId ){
-						employee_getId(auxiliarEmployee,&auxiliarId);
+					if(  auxiliarId>idMaximo ){
+						idMaximo = auxiliarId;
+
 
 					};
 				};
 				printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
-		    	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a cambiar", "\nError, intente nuevamente",  1, idMaximo, 3);
+
+				if(	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a cambiar    ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
+
+					for (int i = 0; i < cantidadEmployees; i++) {
+						auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+						employee_getId(auxiliarEmployee, &auxiliarId);
+
+						if (idEmployeeACambiar == auxiliarId) {
+							printf("\nEmpleado encontrado");
+							employee_printfOne(auxiliarEmployee);
+							break;
+
+						};
+					};
 
 
-		    		for (int i = 0; i < cantidadEmployees; i++) {
-		    			auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-		    			employee_getId(auxiliarEmployee, &auxiliarId);
+					do{
 
-		    			if (idEmployeeACambiar == auxiliarId) {
-		    				break;
-		    			}
-		    		}
-		    		/*
+						utn_getNumero(&datoACambiar, "\n Ingrese una opcion del 1 al 3 \n1- modificar nombre \n2- modificar horas trabajadas \n3- modificar salario, \n4-  Volver al menú anterior        ", "\n Error, ingrese nuevamente", 1, 4, 3);
 
-		    //	utn_getNumero(&datoACambiar, "\n Ingrese una opcion del 1 al 3 \n1- modificar nombre \n2- modificar horas trabajadas \n3- modificar salario, \n4-  Volver al menú anterior", "\n Error, ingrese nuevamente", 1, 3, 3);
+						switch (datoACambiar) {
+							case 1:
+								if (  (utn_getString(auxiliarNombre,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
+										(employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) ){
+											printf("\n DATOS NUEVOS-------------------------------- \n");
+											employee_printfOne(auxiliarEmployee);
+											retorno=0;
+								}
+								break;
+							case 2:
+								if (  (utn_getNumero(&auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas  ", "\n Error, intente nuevamente", 0, 500,3) == 0) &&
+										(employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) ){
 
-		    	 //AACA QUEDAMOS WEY
-		    	 //
+											printf("\n DATOS NUEVOS-------------------------------- \n");
+											employee_printfOne(auxiliarEmployee);
+											retorno=0;
+								}
+								break;
+							case 3:
+								if (  (utn_getNumero(&auxiliarSueldo,"\n Ingrese el sueldo  ", "\n Error, intente nuevamente", 1, 90000,3) == 0) &&
+									 (employee_setSueldo(auxiliarEmployee, auxiliarSueldo) == 0) ){
+											printf("\n DATOS NUEVOS-------------------------------- \n");
+											employee_printfOne(auxiliarEmployee);
+											retorno=0;
+								}
+							break;
+							case 4:
+							break;
+						}
+					 }while(  datoACambiar != 4);
 
-		    	switch (datoACambiar) {
-					case 1:
 
-						break;
-					case 2:
-
-						break;
-					case 3:
-
-					break;
-					case 4:
-
-					break;
+				}else{
+					printf("\n\nLo sentimos, ID no encontrado");
 				}
 
-
-
-
-
-				if (  (utn_getString(auxiliarNombre,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
-					  (utn_getNumero(&auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas  ", "\n Error, intente nuevamente", 0, 500,3) == 0) &&
-					  (utn_getNumero(&auxiliarSueldo,"\n Ingrese el sueldo  ", "\n Error, intente nuevamente", 1, 90000,3) == 0)
-				   ){
-					printf("\nDATOS PEDIDOS\n");
-
-					auxiliarId++;
-					auxiliarEmployee = employee_new();
-					if(   (employee_setId(auxiliarEmployee, auxiliarId) == 0) &&
-						  (employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) &&
-						  (employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) &&
-						  (employee_setSueldo(auxiliarEmployee, auxiliarSueldo) == 0)
-
-					){
-						ll_add(pointerArrayListEmployee, auxiliarEmployee);
-						printf("\nEl empleado cargado es: \n");
-						employee_printfOne(auxiliarEmployee);
-						retorno=0;
-
-					}
-
-
-				};*/
-
-		};
 	}else{
 		printf("No hay empleados cargados");
 
