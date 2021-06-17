@@ -121,6 +121,26 @@ void employee_printfOne(Employee* this){
 
 
 
+//int (*pFunc)(void* ,void*)
+int employee_sortHoras(void* thisA, void* thisB){
+	int retorno=0;
+	int auxiliarHorasA;
+	int auxiliarHorasB;
+
+		if(thisA!=NULL && thisB!=NULL){
+			if(     employee_getHorasTrabajadas(thisA, &auxiliarHorasA)==0 &&
+					employee_getHorasTrabajadas(thisB, &auxiliarHorasB)==0){
+				if(auxiliarHorasA > auxiliarHorasB){
+					retorno=1;
+				}
+				if(auxiliarHorasA < auxiliarHorasB){
+					retorno=-1;
+				};
+			};
+		};
+		return retorno;
+	};
+
 
 //hacer las funciones de sort
 

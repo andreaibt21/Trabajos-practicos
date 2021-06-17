@@ -55,6 +55,7 @@ int main()
 				break;
 			case 5:
 				printf("\n55");
+				controller_removeEmployee(listaEmpleados);
 				break;
 			case 6:
 				printf("\n66");
@@ -62,7 +63,7 @@ int main()
 
 				break;
 			case 7:
-				printf("\n77");
+				controller_sortEmployee(listaEmpleados);
 				break;
 			case 8:
 				controller_saveAsText("data.csv",listaEmpleados);
@@ -76,7 +77,7 @@ int main()
 				printf("\n99");
 				break;
 			case 10:
-				printf("\n1010");
+				ll_deleteLinkedList(listaEmpleados);
 				break;
 
         }

@@ -75,23 +75,20 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
 
 							for(int i=0; i<cantidadEmployees ; i++){
 
-								auxiliarEmployee = (Employee*)ll_get(pointerArrayListEmployee, i);
+								auxiliarEmployee =ll_get(pointerArrayListEmployee, i);
 								employee_getId(auxiliarEmployee, &idMaximo);
 
 								if(  auxiliarId>idMaximo ){
-
 									idMaximo = auxiliarId;
-
-
 								};
 							};
     					};
     					printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
     					idMaximo++;
-    					printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
+    				    printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
     					auxiliarEmployee = employee_new();
 
-    					if(   (employee_setId(auxiliarEmployee, auxiliarId) == 0) &&
+    					if(   (employee_setId(auxiliarEmployee, idMaximo) == 0) &&
   							  (employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) &&
 							  (employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) &&
 							  (employee_setSueldo(auxiliarEmployee, auxiliarSueldo) == 0)
@@ -101,6 +98,9 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
 							printf("\nEl empleado cargado es: \n");
     						employee_printfOne(auxiliarEmployee);
 							retorno=0;
+    					}else{
+    						printf("\nHubo un error al cargar el empleado \n");
+
     					};
     				};
     		};
@@ -154,14 +154,10 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 							printf("\nEmpleado encontrado");
 							employee_printfOne(auxiliarEmployee);
 							break;
-
 						};
 					};
-
-
 					do{
-
-						utn_getNumero(&datoACambiar, "\n Ingrese una opcion del 1 al 3 \n1- modificar nombre \n2- modificar horas trabajadas \n3- modificar salario, \n4-  Volver al menú anterior        ", "\n Error, ingrese nuevamente", 1, 4, 3);
+						utn_getNumero(&datoACambiar, "\n Ingrese una opcion del 1 al 3 \n1- modificar nombre \n2- modificar horas trabajadas \n3- modificar salario, \n4-  Volver al menú principal        ", "\n Error, ingrese nuevamente", 1, 4, 3);
 
 						switch (datoACambiar) {
 							case 1:
@@ -216,7 +212,68 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
 {
-    return 1;
+
+	int retorno = -1;
+	Employee *auxiliarEmployee = NULL;
+	int  auxiliarId = 0;
+
+	char validacion;
+	int idEmployeeACambiar;
+	int cantidadEmployees;
+	int idMaximo;
+
+	int indexEmployee;
+	if(ll_isEmpty(pointerArrayListEmployee) == 0 && pointerArrayListEmployee != NULL){
+
+			printf("\n    ---------------- Baja de un empleado ------------- \n");
+
+
+				cantidadEmployees = ll_len(pointerArrayListEmployee);
+				for(int i=0; i<cantidadEmployees ; i++){
+					auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+					employee_getId(auxiliarEmployee, &idMaximo);
+					if(  auxiliarId>idMaximo ){
+						idMaximo = auxiliarId;
+					};
+				};
+
+
+				if(	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a dar de baja  ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
+
+					for (int i = 0; i < cantidadEmployees; i++) {
+						auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+						employee_getId(auxiliarEmployee, &auxiliarId);
+
+						if (idEmployeeACambiar == auxiliarId) {
+							printf("\nEmpleado encontrado");
+							employee_printfOne(auxiliarEmployee);
+							indexEmployee =  ll_indexOf(pointerArrayListEmployee, auxiliarEmployee);
+							break;
+						};
+
+					};
+							utn_getCharAceptar(&validacion, "\n¿Está seguro que desea borrar este empleado?  ('s' o 'n')        ", "\n Error, ingrese nuevamente", 3);
+							switch (validacion) {
+
+								case 's':
+
+									ll_remove(pointerArrayListEmployee, indexEmployee);
+
+								break;
+								case 'n':
+									printf("\nOperación cancelada");
+								break;
+							}
+				}else{
+					printf("\n\nLo sentimos, ID no encontrado");
+				}
+
+	}else{
+		printf("No hay empleados cargados");
+
+	}
+
+	return retorno;
 }
 
 /** \brief Listar empleados
@@ -269,6 +326,53 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pointerArrayListEmployee)
 {
+		int(*funcionTipoOrden)(void*,void*);
+		int tipodeSort;
+		if(pointerArrayListEmployee != NULL){
+
+
+		utn_getNumero(&tipodeSort, "\n Ingrese una opcion del 1 al 8 "
+				"\n1- Ordenar ID de forma ascendente "
+				"\n2- Ordenar ID de forma descendente "
+				"\n3- Ordenar Nombres de forma ascendente "
+				"\n4- Ordenar Nombres de forma descendente "
+				"\n5- Ordenar Horas de trabajo de forma ascendente "
+				"\n6- Ordenar Horas de trabajo de forma descendente "
+				"\n7- Ordenar Sueldo de forma ascendente "
+				"\n8- Ordenar Sueldo de forma descendente "
+				"\n9-  Volver al menú principal        ", "\n Error, ingrese nuevamente", 1, 9, 3);
+
+				switch (tipodeSort) {
+					case 1:
+					case 2:
+						funcionTipoOrden = employee_sortHoras;
+						break;
+					case 3:
+					case 4:
+						//funcionTipoOrden =
+
+						break;
+					case 5:
+					case 6:
+						//funcionTipoOrden =
+						break;
+					case 7:
+					case 8:
+						//funcionTipoOrden =
+						break;
+					case 9:
+					    break;
+				}
+
+
+		}
+
+		if(tipodeSort % 2 != 0){
+
+		ll_sort(pointerArrayListEmployee, funcionTipoOrden, 1);
+		}else{
+		ll_sort(pointerArrayListEmployee, funcionTipoOrden, 0);
+		}
     return 1;
 }
 
@@ -286,7 +390,6 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 	int auxiliarHorasTrabajadas;
 	int auxiliarSueldo;
 	int retorno = -1;
-	//int ll_isEmpty(LinkedList* this); cero si no esta vacia, tiene algo
 
 	if(ll_isEmpty(pointerArrayListEmployee) == 0){
 	FILE *pointerFile=fopen(path,"w");
@@ -346,9 +449,7 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee)
 			}
 			if (cantidadEscrita < 1){
 			printf("\nError al escribir el archivo");
-
 			}
-
 			fclose(pointerFile);
 
 			retorno = 0;
