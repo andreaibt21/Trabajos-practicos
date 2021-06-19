@@ -17,13 +17,12 @@ int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListEmpl
 	Employee* pointerAuxEmpleado=NULL;
 
 	if(pointerFile != NULL && pointerArrayListEmployee != NULL){
-		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-		printf("%s   %s    %s    %s\n\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-//*(buffer+x)
+		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3));
+
 
 	while( !feof(pointerFile) ){
-		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-		pointerAuxEmpleado = employee_newParametros(buffer[0],buffer[1],buffer[2],buffer[3]);
+		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3));
+		pointerAuxEmpleado = employee_newParametros(*(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3));
 
 		if(pointerAuxEmpleado != NULL){
 			ll_add(pointerArrayListEmployee,pointerAuxEmpleado); //Agrego cada empleado de la lista a la linkedlist
@@ -31,9 +30,9 @@ int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListEmpl
 		}
 
 
-	};
+	}
 
-	};
+	}
   	 return retorno;
 }
 
@@ -67,12 +66,12 @@ int parser_EmployeeFromBinary(FILE* pointerFile , LinkedList* pointerArrayListEm
 
 							ll_add(pointerArrayListEmployee, pointerAuxEmpleado);
 							retorno = 0;
-						};
-					};
+						}
+					}
 
-				};
-			};
-		};
+				}
+			}
+		}
 
     return retorno;
-};
+}

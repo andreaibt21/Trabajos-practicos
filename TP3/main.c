@@ -33,17 +33,15 @@ int main()
 
         switch(respuesta) {
             case 1:
-            	if(controller_loadFromText("data.csv",listaEmpleados)){
+            	if( controller_loadFromText("data.csv",listaEmpleados)  != 0){
             		printf("Error, intente nuevamente");
-            	}else{
-            		printf("Todo ok");
             	}
-
-                ;
                 break;
 			case 2:
 
-				controller_loadFromBinary("data.bin",listaEmpleados);
+				if(	controller_loadFromBinary("data.bin",listaEmpleados) != 0){
+            		printf("Error, intente nuevamente");
+            	}
 
 				break;
 			case 3:
@@ -54,11 +52,11 @@ int main()
 				controller_editEmployee(listaEmpleados);
 				break;
 			case 5:
-				printf("\n55");
+
 				controller_removeEmployee(listaEmpleados);
 				break;
 			case 6:
-				printf("\n66");
+
 				controller_ListEmployee(listaEmpleados);
 
 				break;
@@ -68,13 +66,11 @@ int main()
 			case 8:
 				controller_saveAsText("data.csv",listaEmpleados);
 
-				printf("\n88");
+
 				break;
 			case 9:
 				controller_saveAsBinary("data.bin",listaEmpleados);
-				//controlar que primero lo abriste en texto
 
-				printf("\n99");
 				break;
 			case 10:
 				ll_deleteLinkedList(listaEmpleados);

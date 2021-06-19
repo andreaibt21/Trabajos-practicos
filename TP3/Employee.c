@@ -5,7 +5,6 @@
 #include "Employee.h"
 #include "parser.h"
 
-
 Employee* employee_new(){
 	return (Employee*)malloc(sizeof(Employee));
 }
@@ -26,12 +25,6 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 	}
 	return auxiliarEmployee;
 }
-
-void employee_delete(Employee* this){
-	free(this);
-
-}
-
 
 int employee_setId(Employee* this,int id){
 	int retorno=-1;
@@ -121,7 +114,7 @@ void employee_printfOne(Employee* this){
 
 
 
-//int (*pFunc)(void* ,void*)
+
 int employee_sortHoras(void* thisA, void* thisB){
 	int retorno=0;
 	int auxiliarHorasA;
@@ -135,20 +128,69 @@ int employee_sortHoras(void* thisA, void* thisB){
 				}
 				if(auxiliarHorasA < auxiliarHorasB){
 					retorno=-1;
-				};
-			};
-		};
+				}
+			}
+		}
 		return retorno;
-	};
+}
+
+//if(strcmp(auxNombre1,auxNombre2)>0
+
+int employee_sortNombres(void* thisA, void* thisB){
+	int retorno=0;
+	char auxiliarNombreA[130];
+	char auxiliarNombreB[130];
+
+		if(thisA!=NULL && thisB!=NULL){
+			if(     employee_getNombre(thisA, auxiliarNombreA)==0 &&
+					employee_getNombre(thisB, auxiliarNombreB)==0){
+				if(strcmp (auxiliarNombreA , auxiliarNombreB) > 0 ){
+					retorno=1;
+				}
+				if(strcmp (auxiliarNombreA , auxiliarNombreB) < 0 ){
+					retorno=-1;
+				}
+			}
+		}
+		return retorno;
+}
+
+int employee_sortID(void* thisA, void* thisB){
+	int retorno=0;
+	int auxiliarIdA;
+	int auxiliarIdB;
+
+		if(thisA!=NULL && thisB!=NULL){
+			if(     employee_getId(thisA, &auxiliarIdA)==0 &&
+					employee_getId(thisB, &auxiliarIdB)==0){
+				if(auxiliarIdA > auxiliarIdB){
+					retorno=1;
+				}
+				if(auxiliarIdA < auxiliarIdB){
+					retorno=-1;
+				}
+			}
+		}
+		return retorno;
+}
 
 
-//hacer las funciones de sort
+int employee_sortSueldo(void* thisA, void* thisB){
+	int retorno=0;
+	int auxiliarSueldoA;
+	int auxiliarSueldoB;
 
-
-
-
-
-
-
-
+		if(thisA!=NULL && thisB!=NULL){
+			if(     employee_getSueldo(thisA, &auxiliarSueldoA)==0 &&
+					employee_getSueldo(thisB, &auxiliarSueldoB)==0){
+				if(auxiliarSueldoA > auxiliarSueldoB){
+					retorno=1;
+				}
+				if(auxiliarSueldoA < auxiliarSueldoB){
+					retorno=-1;
+				}
+			}
+		}
+		return retorno;
+}
 

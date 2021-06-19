@@ -5,45 +5,6 @@
 #include "parser.h"
 #include "utn.h"
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
-int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
-	ll_clear(pointerArrayListEmployee);
-	int retorno = -1;
-	if (path != NULL && pointerArrayListEmployee != NULL){
-		FILE *pointerFile=fopen(path,"r");
-		parser_EmployeeFromText(pointerFile, pointerArrayListEmployee);
-		fclose(pointerFile);   //le falta varias validaciones a esta funcion
-		retorno = 0;
-	};
-    return retorno;
-}
-
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
-int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee){
-	ll_clear(pointerArrayListEmployee);
-	int retorno = -1;
-
-		if (path != NULL && pointerArrayListEmployee != NULL){
-			FILE *pointerFile=fopen(path,"rb");
-			parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee);
-			fclose(pointerFile); //le falta varias validaciones a esta funcion
-			retorno = 0;
-		};
-	    return retorno;
-}
-
 /** \brief Alta de empleados
  *
  * \param path char*
@@ -142,7 +103,7 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 
 					};
 				};
-				printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
+
 
 				if(	utn_getNumero(&idEmployeeACambiar, "\nIngrese el id del Empleado a cambiar    ", "\nError, intente nuevamente",  -1, idMaximo, 3) == 0){
 
@@ -154,15 +115,15 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 							printf("\nEmpleado encontrado");
 							employee_printfOne(auxiliarEmployee);
 							break;
-						};
-					};
+						}
+					}
 					do{
 						utn_getNumero(&datoACambiar, "\n Ingrese una opcion del 1 al 3 \n1- modificar nombre \n2- modificar horas trabajadas \n3- modificar salario, \n4-  Volver al menú principal        ", "\n Error, ingrese nuevamente", 1, 4, 3);
 
 						switch (datoACambiar) {
 							case 1:
 								if (  (utn_getString(auxiliarNombre,"\n Ingrese el nombre  ", "\n Error intente nuevamente  ", 3) == 0) &&
-										(employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) ){
+									  (employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) ){
 											printf("\n DATOS NUEVOS-------------------------------- \n");
 											employee_printfOne(auxiliarEmployee);
 											retorno=0;
@@ -170,8 +131,7 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 								break;
 							case 2:
 								if (  (utn_getNumero(&auxiliarHorasTrabajadas,"\n Ingrese las horas trabajadas  ", "\n Error, intente nuevamente", 0, 500,3) == 0) &&
-										(employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) ){
-
+									  (employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) ){
 											printf("\n DATOS NUEVOS-------------------------------- \n");
 											employee_printfOne(auxiliarEmployee);
 											retorno=0;
@@ -179,7 +139,7 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 								break;
 							case 3:
 								if (  (utn_getNumero(&auxiliarSueldo,"\n Ingrese el sueldo  ", "\n Error, intente nuevamente", 1, 90000,3) == 0) &&
-									 (employee_setSueldo(auxiliarEmployee, auxiliarSueldo) == 0) ){
+									  (employee_setSueldo(auxiliarEmployee, auxiliarSueldo) == 0) ){
 											printf("\n DATOS NUEVOS-------------------------------- \n");
 											employee_printfOne(auxiliarEmployee);
 											retorno=0;
@@ -249,19 +209,18 @@ int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
 							employee_printfOne(auxiliarEmployee);
 							indexEmployee =  ll_indexOf(pointerArrayListEmployee, auxiliarEmployee);
 							break;
-						};
+						}
 
-					};
+					}
 							utn_getCharAceptar(&validacion, "\n¿Está seguro que desea borrar este empleado?  ('s' o 'n')        ", "\n Error, ingrese nuevamente", 3);
 							switch (validacion) {
 
 								case 's':
-
 									ll_remove(pointerArrayListEmployee, indexEmployee);
-
+									printf("\n Empleado eliminado");
 								break;
 								case 'n':
-									printf("\nOperación cancelada");
+									printf("\n Operación cancelada");
 								break;
 							}
 				}else{
@@ -311,7 +270,10 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
 																	   auxiliarSueldo);
 		};
 		retorno = 0;
-	};
+	}else{
+		printf("No hay empleados cargados");
+
+	}
 
 
     return retorno;
@@ -326,54 +288,61 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pointerArrayListEmployee)
 {
+		int retorno = -1;
 		int(*funcionTipoOrden)(void*,void*);
 		int tipodeSort;
-		if(pointerArrayListEmployee != NULL){
 
 
-		utn_getNumero(&tipodeSort, "\n Ingrese una opcion del 1 al 8 "
-				"\n1- Ordenar ID de forma ascendente "
-				"\n2- Ordenar ID de forma descendente "
-				"\n3- Ordenar Nombres de forma ascendente "
-				"\n4- Ordenar Nombres de forma descendente "
-				"\n5- Ordenar Horas de trabajo de forma ascendente "
-				"\n6- Ordenar Horas de trabajo de forma descendente "
-				"\n7- Ordenar Sueldo de forma ascendente "
-				"\n8- Ordenar Sueldo de forma descendente "
-				"\n9-  Volver al menú principal        ", "\n Error, ingrese nuevamente", 1, 9, 3);
-
-				switch (tipodeSort) {
-					case 1:
-					case 2:
-						funcionTipoOrden = employee_sortHoras;
-						break;
-					case 3:
-					case 4:
-						//funcionTipoOrden =
-
-						break;
-					case 5:
-					case 6:
-						//funcionTipoOrden =
-						break;
-					case 7:
-					case 8:
-						//funcionTipoOrden =
-						break;
-					case 9:
-					    break;
-				}
+		int lenghtEmployees = ll_len(pointerArrayListEmployee);
+		if (pointerArrayListEmployee != NULL && lenghtEmployees > 0){
 
 
-		}
 
-		if(tipodeSort % 2 != 0){
+			utn_getNumero(&tipodeSort, "\n Ingrese una opcion del 1 al 8 "
+					"\n1- Ordenar ID de forma ascendente "
+					"\n2- Ordenar ID de forma descendente "
+					"\n3- Ordenar Nombres de forma ascendente "
+					"\n4- Ordenar Nombres de forma descendente "
+					"\n5- Ordenar Horas de trabajo de forma ascendente "
+					"\n6- Ordenar Horas de trabajo de forma descendente "
+					"\n7- Ordenar Sueldo de forma ascendente "
+					"\n8- Ordenar Sueldo de forma descendente "
+					"\n9-  Volver al menú principal        ", "\n Error, ingrese nuevamente", 1, 9, 3);
 
-		ll_sort(pointerArrayListEmployee, funcionTipoOrden, 1);
+					switch (tipodeSort) {
+						case 1:
+						case 2:
+							funcionTipoOrden = employee_sortID;
+							break;
+						case 3:
+						case 4:
+							funcionTipoOrden = employee_sortNombres;
+							break;
+						case 5:
+						case 6:
+							funcionTipoOrden = employee_sortHoras;
+							break;
+						case 7:
+						case 8:
+							funcionTipoOrden = employee_sortSueldo;
+							break;
+						case 9:
+							break;
+					}//Fin switch
+
+			if(tipodeSort % 2 != 0){
+				ll_sort(pointerArrayListEmployee, funcionTipoOrden, 1);
+			}else{
+				ll_sort(pointerArrayListEmployee, funcionTipoOrden, 0);
+			}
+			printf("\n               ** Lista ordenada ** ");
+			retorno = 0;
 		}else{
-		ll_sort(pointerArrayListEmployee, funcionTipoOrden, 0);
+			printf("No hay empleados cargados");
+
 		}
-    return 1;
+
+    return retorno;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
@@ -392,7 +361,7 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 	int retorno = -1;
 
 	if(ll_isEmpty(pointerArrayListEmployee) == 0){
-	FILE *pointerFile=fopen(path,"w");
+	FILE *pointerFile = fopen(path,"w");
 		if (path != NULL && pointerArrayListEmployee != NULL && pointerFile != NULL){
 			fprintf( pointerFile,"id,    nombre,    horasTrabajadas,    sueldo\n");
 			for(int i = 0; i < ll_len(pointerArrayListEmployee); i++){
@@ -410,6 +379,7 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 			}
 
 			fclose(pointerFile);
+			printf("\nDatos guardados en %s", path);
 			retorno = 0;
 		};
 	}else{
@@ -448,16 +418,154 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee)
 				};
 			}
 			if (cantidadEscrita < 1){
-			printf("\nError al escribir el archivo");
+				printf("\nError al escribir el archivo");
+			}else{
+				printf("\nDatos guardados en %s", path);
+				retorno = 0;
 			}
 			fclose(pointerFile);
-
-			retorno = 0;
 		};
 	}else{
 		printf("Error, No hay datos para guardar");
 
 	}
 	return retorno;
+}
+
+/** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
+ *
+ * \param path char*
+ * \param pointerArrayListEmployee LinkedList*
+ * \return int
+ *
+ */
+int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
+
+	int retorno = -1;
+	char validacion = 's';
+	if (path != NULL && pointerArrayListEmployee != NULL){
+
+
+		if(ll_isEmpty (pointerArrayListEmployee ) == 1){
+
+			FILE *pointerFile=fopen(path,"r");
+
+			if(pointerFile != NULL &&
+			   parser_EmployeeFromText(pointerFile, pointerArrayListEmployee) == 0 ){
+				printf("\nArchivo leido y cerrado con éxito");
+				retorno = 0;
+
+			}else{
+				printf("\nNo se pudo leer el archivo");
+			}
+			fclose(pointerFile);
+
+		}else{
+
+			utn_getCharAceptar(&validacion, "\nYa hay datos cargados en el sistema, desea guardarlos? ('s' o 'n')    ", "\n Error, ingrese nuevamente", 3);
+			switch (validacion)
+			{
+				case 'n':
+					printf("\nSe han borrado los datos cargados anteriormente.  ");
+					ll_clear(pointerArrayListEmployee);
+					FILE *pointerFile=fopen(path,"r");
+
+					if(pointerFile != NULL && parser_EmployeeFromText(pointerFile, pointerArrayListEmployee) == 0 )
+					{
+						printf("\nArchivo nuevo leido y cerrado con éxito");
+						fclose(pointerFile);
+						retorno = 0;
+					}
+				break;
+				case 's':
+					if(controller_saveAsText( "respaldo.csv", pointerArrayListEmployee) == 0){
+
+						ll_clear(pointerArrayListEmployee);
+
+						FILE *pointerFile=fopen(path,"r");
+
+						if(pointerFile != NULL && parser_EmployeeFromText(pointerFile, pointerArrayListEmployee) == 0 )
+						{
+							printf("\nArchivo nuevo leido y cerrado con éxito");
+							fclose(pointerFile);
+							retorno = 0;
+						}
+
+
+					}
+				break;
+				}
+			}
+	}
+    return retorno;
+}
+
+/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
+ *
+ * \param path char*
+ * \param pointerArrayListEmployee LinkedList*
+ * \return int
+ *
+ */
+int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee){
+
+	    int retorno = -1;
+	    	char validacion = 's';
+	    	if (path != NULL && pointerArrayListEmployee != NULL){
+
+
+	    		if(ll_isEmpty (pointerArrayListEmployee ) == 1){
+
+	    			FILE *pointerFile=fopen(path,"rb");
+
+	    			if(pointerFile != NULL &&
+	    				parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee) == 0 ){
+	    				printf("\nArchivo leido y cerrado con éxito");
+	    				retorno = 0;
+
+	    			}else{
+	    				printf("\nNo se pudo leer el archivo");
+	    			}
+	    			fclose(pointerFile);
+
+	    		}else{
+
+	    			utn_getCharAceptar(&validacion, "\nYa hay datos cargados en el sistema, desea guardarlos? ('s' o 'n')    ", "\n Error, ingrese nuevamente", 3);
+	    			switch (validacion)
+	    			{
+	    				case 'n':
+	    					printf("\nSe han borrado los datos cargados anteriormente.  ");
+	    					ll_clear(pointerArrayListEmployee);
+	    					FILE *pointerFile=fopen(path,"rb");
+
+	    					if(  pointerFile != NULL &&
+	    					     parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee)  == 0  )
+	    					{
+	    						printf("\nArchivo nuevo leido y cerrado con éxito");
+	    						fclose(pointerFile);
+	    						retorno = 0;
+	    					}
+	    				break;
+	    				case 's':
+	    					if ( controller_saveAsBinary("respaldo.bin",pointerArrayListEmployee) == 0 )
+	    					{
+								ll_clear(pointerArrayListEmployee);
+								FILE *pointerFile=fopen(path,"rb");
+
+								if(  pointerFile != NULL &&
+									 parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee)  == 0  )
+								{
+									printf("\nArchivo nuevo leido y cerrado con éxito");
+									fclose(pointerFile);
+									retorno = 0;
+								}
+	    					}
+	    				break;
+	    				}
+	    			}
+	    	}
+	        return retorno;
+
+
 }
 

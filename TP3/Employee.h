@@ -8,9 +8,26 @@ typedef struct
     int sueldo;
 }Employee;
 
+
+
+/** \brief reserva un espacio de memoria de tipo empleado y lo retorna
+ *
+ * \param this LinkedList* Puntero a la lista
+ * \return Retorna un empleado nuevo
+ *
+ */
 Employee* employee_new();
+
+
+/** \brief Crea un empleado nuevo y lo devuelve por retorno
+ *
+ * \param char* idStr
+ * \param char* nombreStr
+ * \param char* horasTrabajadasStr
+ * \param char* sueldoStr
+ * \return Retorna un empleado nuevo
+ */
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr);
-void employee_delete();
 
 int employee_setId(Employee* this,int id);
 int employee_getId(Employee* this,int* id);
@@ -25,6 +42,10 @@ int employee_setSueldo(Employee* this,int sueldo);
 int employee_getSueldo(Employee* this,int* sueldo);
 
 void employee_printfOne(Employee* this);
+
+int employee_sortID(void* thisA, void* thisB);
+int employee_sortNombres(void* thisA, void* thisB);
 int employee_sortHoras(void* thisA, void* thisB);
+int employee_sortSueldo(void* thisA, void* thisB);
 
 #endif // employee_H_INCLUDED
