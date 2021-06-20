@@ -1,3 +1,7 @@
+ /** controller.c
+ *
+ *      Author: Andrea Briceño
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
@@ -5,15 +9,10 @@
 #include "parser.h"
 #include "utn.h"
 
-/** \brief Alta de empleados
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_addEmployee(LinkedList* pointerArrayListEmployee){
-    int retorno = -1;
+
+	int retorno = -1;
     Employee *auxiliarEmployee = NULL;
     int  auxiliarId = 0;
 	int idMaximo;
@@ -68,13 +67,7 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
 	return retorno;
 }
 
-/** \brief Modificar datos de empleado
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 {
 
@@ -163,20 +156,13 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 	return retorno;
 }
 
-/** \brief Baja de empleado
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
 {
 
 	int retorno = -1;
 	Employee *auxiliarEmployee = NULL;
 	int  auxiliarId = 0;
-
 	char validacion;
 	int idEmployeeACambiar;
 	int cantidadEmployees;
@@ -235,13 +221,6 @@ int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
 	return retorno;
 }
 
-/** \brief Listar empleados
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
 int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
 {
 	int retorno = -1;
@@ -279,13 +258,7 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
     return retorno;
 }
 
-/** \brief Ordenar empleados
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_sortEmployee(LinkedList* pointerArrayListEmployee)
 {
 		int retorno = -1;
@@ -345,20 +318,14 @@ int controller_sortEmployee(LinkedList* pointerArrayListEmployee)
     return retorno;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 {
+	int retorno = -1;
 	int  auxiliarId;
 	char auxiliarNombre[200];
 	int auxiliarHorasTrabajadas;
 	int auxiliarSueldo;
-	int retorno = -1;
 
 	if(ll_isEmpty(pointerArrayListEmployee) == 0){
 	FILE *pointerFile = fopen(path,"w");
@@ -392,13 +359,7 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee)
 {
 	int retorno = -1;
@@ -432,13 +393,7 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee)
 	return retorno;
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
 
 	int retorno = -1;
@@ -500,13 +455,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
     return retorno;
 }
 
-/** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pointerArrayListEmployee LinkedList*
- * \return int
- *
- */
+
 int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee){
 
 	    int retorno = -1;

@@ -1,3 +1,8 @@
+ /** main.c
+ *		TP3 - 1°E
+ *      Author: Andrea Briceño
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
@@ -74,6 +79,7 @@ int main()
 				break;
 			case 10:
 				ll_deleteLinkedList(listaEmpleados);
+				printf("\n  ****************  USTED HA SALIDO  ***************** ");
 				break;
 
         }

@@ -1,3 +1,8 @@
+ /** Employee.c
+ *
+ *      Author: Andrea Briceño
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -134,7 +139,6 @@ int employee_sortHoras(void* thisA, void* thisB){
 		return retorno;
 }
 
-//if(strcmp(auxNombre1,auxNombre2)>0
 
 int employee_sortNombres(void* thisA, void* thisB){
 	int retorno=0;
