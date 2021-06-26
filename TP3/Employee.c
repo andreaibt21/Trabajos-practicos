@@ -10,15 +10,15 @@
 #include "Employee.h"
 #include "parser.h"
 
-Employee* employee_new(){
-	return (Employee*)malloc(sizeof(Employee));
+Pelicula* pelicula_new(){
+	return (Pelicula*)malloc(sizeof(Pelicula));
 }
 
-Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr){
-	Employee* auxiliarEmployee = employee_new();
+Pelicula* pelicula_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr){
+	Pelicula* auxiliarEmployee = pelicula_new();
 
 	if( idStr != NULL && nombreStr != NULL &&  horasTrabajadasStr != NULL && sueldoStr != NULL){
-			if( (employee_setId( auxiliarEmployee, atoi(idStr) )  ==0) &&
+			if( (movie_setId( auxiliarEmployee, atoi(idStr) )  ==0) &&
 				(employee_setNombre( auxiliarEmployee, nombreStr) ==0) &&
 				(employee_setHorasTrabajadas( auxiliarEmployee, atoi(horasTrabajadasStr) ) ==0) &&
 				(employee_setSueldo( auxiliarEmployee, atoi(sueldoStr) ) ==0) ){
@@ -31,7 +31,7 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 	return auxiliarEmployee;
 }
 
-int employee_setId(Employee* this,int id){
+int movie_setId(Pelicula* this,int id){
 	int retorno=-1;
 		if(this != NULL && id > 0){
 			this -> id = id;
@@ -41,7 +41,7 @@ int employee_setId(Employee* this,int id){
 	return retorno;
 }
 
-int employee_getId(Employee* this,int* id){
+int movie_getId(Pelicula* this,int* id){
 	int retorno=-1;
 	if( this != NULL && id != NULL ){
 		*id = this -> id;
@@ -51,7 +51,7 @@ int employee_getId(Employee* this,int* id){
 }
 
 
-int employee_setNombre(Employee* this,char* nombre){
+int employee_setNombre(Pelicula* this,char* nombre){
 	int retorno=-1;
 	if( this != NULL && nombre != NULL){
 		strcpy( this -> nombre , nombre );
@@ -60,7 +60,7 @@ int employee_setNombre(Employee* this,char* nombre){
 	return retorno;
 }
 
-int employee_getNombre(Employee* this,char* nombre){
+int employee_getNombre(Pelicula* this,char* nombre){
 	int retorno=-1;
 	if( this != NULL && nombre != NULL){
 		strcpy( nombre , this -> nombre );
@@ -70,7 +70,7 @@ int employee_getNombre(Employee* this,char* nombre){
 }
 
 
-int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas){
+int employee_setHorasTrabajadas(Pelicula* this,int horasTrabajadas){
 	int retorno=-1;
 	if( this != NULL &&  horasTrabajadas > -1){
 		 this -> horasTrabajadas = horasTrabajadas ;
@@ -79,7 +79,7 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas){
 	return retorno;
 }
 
-int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas){
+int employee_getHorasTrabajadas(Pelicula* this,int* horasTrabajadas){
 	int retorno=-1;
 	if( this != NULL &&  horasTrabajadas != NULL){
 		*horasTrabajadas = this -> horasTrabajadas;
@@ -89,7 +89,7 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas){
 }
 
 
-int employee_setSueldo(Employee* this,int sueldo){
+int employee_setSueldo(Pelicula* this,int sueldo){
 	int retorno=-1;
 	if( this != NULL &&  sueldo > -1){
 		 this -> sueldo = sueldo ;
@@ -98,7 +98,7 @@ int employee_setSueldo(Employee* this,int sueldo){
 	return retorno;
 }
 
-int employee_getSueldo(Employee* this,int* sueldo){
+int employee_getSueldo(Pelicula* this,int* sueldo){
 	int retorno=-1;
 	if( this != NULL &&  sueldo != NULL){
 		*sueldo = this -> sueldo;
@@ -107,7 +107,7 @@ int employee_getSueldo(Employee* this,int* sueldo){
 	return retorno;
 }
 
-void employee_printfOne(Employee* this){
+void employee_printfOne(Pelicula* this){
 	printf("\n  ****************  DATOS PERSONALES DEL EMPLEADO  ***************** ");
 	printf("\n %d.  Empleado: %s,     Horas trabajadas: %d,      Sueldo: $%d ",
 			(*(this)).id,
@@ -165,8 +165,8 @@ int employee_sortID(void* thisA, void* thisB){
 	int auxiliarIdB;
 
 		if(thisA!=NULL && thisB!=NULL){
-			if(     employee_getId(thisA, &auxiliarIdA)==0 &&
-					employee_getId(thisB, &auxiliarIdB)==0){
+			if(     movie_getId(thisA, &auxiliarIdA)==0 &&
+					movie_getId(thisB, &auxiliarIdB)==0){
 				if(auxiliarIdA > auxiliarIdB){
 					retorno=1;
 				}

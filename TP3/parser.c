@@ -14,7 +14,7 @@ int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListEmpl
 	int retorno = 0;
 	char buffer[4][130];
 
-	Employee* pointerAuxEmpleado=NULL;
+	Pelicula* pointerAuxEmpleado=NULL;
 
 	if(pointerFile != NULL && pointerArrayListEmployee != NULL){
 		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3));
@@ -22,7 +22,7 @@ int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListEmpl
 
 	while( !feof(pointerFile) ){
 		fscanf(pointerFile, "%[^,],%[^,],%[^,],%[^\n]\n", *(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3));
-		pointerAuxEmpleado = employee_newParametros(*(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3));
+		pointerAuxEmpleado = pelicula_newParametros(*(buffer+0), *(buffer+1),*(buffer+2),*(buffer+3));
 
 		if(pointerAuxEmpleado != NULL){
 			ll_add(pointerArrayListEmployee,pointerAuxEmpleado); //Agrego cada empleado de la lista a la linkedlist
@@ -46,20 +46,20 @@ int parser_EmployeeFromText(FILE* pointerFile , LinkedList* pointerArrayListEmpl
 int parser_EmployeeFromBinary(FILE* pointerFile , LinkedList* pointerArrayListEmployee)
 {	int retorno;
 	int retornoLeido;
-	Employee* pointerAuxEmpleado=NULL;
-	Employee auxiliarEmployee;
+	Pelicula* pointerAuxEmpleado=NULL;
+	Pelicula auxiliarEmployee;
 
 		if(pointerFile!=NULL && pointerArrayListEmployee!=NULL){
 
 			while( !feof(pointerFile) ){
 
-				retornoLeido = fread(&auxiliarEmployee,sizeof(Employee),1,pointerFile);
-				pointerAuxEmpleado = employee_new();
+				retornoLeido = fread(&auxiliarEmployee,sizeof(Pelicula),1,pointerFile);
+				pointerAuxEmpleado = pelicula_new();
 				if (pointerAuxEmpleado != NULL ) {
 
 					if(retornoLeido != 0){
 
-						if(  (employee_setId(pointerAuxEmpleado, auxiliarEmployee.id)   == 0) &&
+						if(  (movie_setId(pointerAuxEmpleado, auxiliarEmployee.id)   == 0) &&
 						(employee_setNombre(pointerAuxEmpleado, auxiliarEmployee.nombre)  == 0) &&
 						(employee_setHorasTrabajadas(pointerAuxEmpleado, auxiliarEmployee.horasTrabajadas) == 0) &&
 						(employee_setSueldo(pointerAuxEmpleado, auxiliarEmployee.sueldo) == 0) ){

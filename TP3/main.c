@@ -50,23 +50,23 @@ int main()
 
 				break;
 			case 3:
-				controller_addEmployee(listaEmpleados);
+				controller_addMovie(listaEmpleados);
 
 				break;
 			case 4:
-				controller_editEmployee(listaEmpleados);
+				controller_editMovie(listaEmpleados);
 				break;
 			case 5:
 
-				controller_removeEmployee(listaEmpleados);
+				controller_removeMovie(listaEmpleados);
 				break;
 			case 6:
 
-				controller_ListEmployee(listaEmpleados);
+				controller_ListMovie(listaEmpleados);
 
 				break;
 			case 7:
-				controller_sortEmployee(listaEmpleados);
+				controller_sortMovie(listaEmpleados);
 				break;
 			case 8:
 				controller_saveAsText("data.csv",listaEmpleados);

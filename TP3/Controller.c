@@ -10,10 +10,10 @@
 #include "utn.h"
 
 
-int controller_addEmployee(LinkedList* pointerArrayListEmployee){
+int controller_addMovie(LinkedList* pointerArrayListEmployee){
 
 	int retorno = -1;
-    Employee *auxiliarEmployee = NULL;
+    Pelicula *auxiliarEmployee = NULL;
     int  auxiliarId = 0;
 	int idMaximo;
 	char auxiliarNombre[200];
@@ -36,7 +36,7 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
 							for(int i=0; i<cantidadEmployees ; i++){
 
 								auxiliarEmployee =ll_get(pointerArrayListEmployee, i);
-								employee_getId(auxiliarEmployee, &idMaximo);
+								movie_getId(auxiliarEmployee, &idMaximo);
 
 								if(  auxiliarId>idMaximo ){
 									idMaximo = auxiliarId;
@@ -46,9 +46,9 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
     					printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
     					idMaximo++;
     				    printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
-    					auxiliarEmployee = employee_new();
+    					auxiliarEmployee = pelicula_new();
 
-    					if(   (employee_setId(auxiliarEmployee, idMaximo) == 0) &&
+    					if(   (movie_setId(auxiliarEmployee, idMaximo) == 0) &&
   							  (employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) &&
 							  (employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) &&
 							  (employee_setSueldo(auxiliarEmployee, auxiliarSueldo) == 0)
@@ -68,11 +68,11 @@ int controller_addEmployee(LinkedList* pointerArrayListEmployee){
 }
 
 
-int controller_editEmployee(LinkedList* pointerArrayListEmployee)
+int controller_editMovie(LinkedList* pointerArrayListEmployee)
 {
 
 	int retorno = -1;
-	Employee *auxiliarEmployee = NULL;
+	Pelicula *auxiliarEmployee = NULL;
 	int  auxiliarId = 0;
 	char auxiliarNombre[200];
 	int auxiliarHorasTrabajadas;
@@ -89,7 +89,7 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 				cantidadEmployees = ll_len(pointerArrayListEmployee);
 				for(int i=0; i<cantidadEmployees ; i++){
 					auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-					employee_getId(auxiliarEmployee, &idMaximo);
+					movie_getId(auxiliarEmployee, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
 
@@ -102,7 +102,7 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 
 					for (int i = 0; i < cantidadEmployees; i++) {
 						auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-						employee_getId(auxiliarEmployee, &auxiliarId);
+						movie_getId(auxiliarEmployee, &auxiliarId);
 
 						if (idEmployeeACambiar == auxiliarId) {
 							printf("\nEmpleado encontrado");
@@ -157,11 +157,11 @@ int controller_editEmployee(LinkedList* pointerArrayListEmployee)
 }
 
 
-int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
+int controller_removeMovie(LinkedList* pointerArrayListEmployee)
 {
 
 	int retorno = -1;
-	Employee *auxiliarEmployee = NULL;
+	Pelicula *auxiliarEmployee = NULL;
 	int  auxiliarId = 0;
 	char validacion;
 	int idEmployeeACambiar;
@@ -177,7 +177,7 @@ int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
 				cantidadEmployees = ll_len(pointerArrayListEmployee);
 				for(int i=0; i<cantidadEmployees ; i++){
 					auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-					employee_getId(auxiliarEmployee, &idMaximo);
+					movie_getId(auxiliarEmployee, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
 					};
@@ -188,7 +188,7 @@ int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
 
 					for (int i = 0; i < cantidadEmployees; i++) {
 						auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-						employee_getId(auxiliarEmployee, &auxiliarId);
+						movie_getId(auxiliarEmployee, &auxiliarId);
 
 						if (idEmployeeACambiar == auxiliarId) {
 							printf("\nEmpleado encontrado");
@@ -221,7 +221,7 @@ int controller_removeEmployee(LinkedList* pointerArrayListEmployee)
 	return retorno;
 }
 
-int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
+int controller_ListMovie(LinkedList* pointerArrayListEmployee)
 {
 	int retorno = -1;
 	int  auxiliarId;
@@ -235,9 +235,9 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
 
 
 		for(int i = 0; i < lenghtEmployees; i++ ){
-			Employee*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
+			Pelicula*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
 
-			employee_getId( auxiliarEmployee, &auxiliarId);
+			movie_getId( auxiliarEmployee, &auxiliarId);
 			employee_getNombre(auxiliarEmployee, auxiliarNombre);
 			employee_getHorasTrabajadas(auxiliarEmployee, &auxiliarHorasTrabajadas);
 			employee_getSueldo(auxiliarEmployee, &auxiliarSueldo);
@@ -259,7 +259,7 @@ int controller_ListEmployee(LinkedList* pointerArrayListEmployee)
 }
 
 
-int controller_sortEmployee(LinkedList* pointerArrayListEmployee)
+int controller_sortMovie(LinkedList* pointerArrayListEmployee)
 {
 		int retorno = -1;
 		int(*funcionTipoOrden)(void*,void*);
@@ -333,8 +333,8 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 			fprintf( pointerFile,"id,    nombre,    horasTrabajadas,    sueldo\n");
 			for(int i = 0; i < ll_len(pointerArrayListEmployee); i++){
 
-				Employee  *auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-				if(employee_getId( auxiliarEmployee, &auxiliarId) == 0 &&
+				Pelicula  *auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+				if(movie_getId( auxiliarEmployee, &auxiliarId) == 0 &&
 				employee_getNombre(auxiliarEmployee, auxiliarNombre) == 0 &&
 				employee_getHorasTrabajadas(auxiliarEmployee, &auxiliarHorasTrabajadas) == 0 &&
 				employee_getSueldo(auxiliarEmployee, &auxiliarSueldo) == 0 ){
@@ -373,9 +373,9 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee)
 
 			for(int i = 0; i < lenghtEmployees; i++ ){
 
-				Employee*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
+				Pelicula*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
 				if(pointerFile != NULL){
-					cantidadEscrita = fwrite(auxiliarEmployee, sizeof(Employee),1, pointerFile);
+					cantidadEscrita = fwrite(auxiliarEmployee, sizeof(Pelicula),1, pointerFile);
 				};
 			}
 			if (cantidadEscrita < 1){

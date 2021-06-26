@@ -11,7 +11,7 @@ typedef struct
     char nombre[128];
     int horasTrabajadas;
     int sueldo;
-}Employee;
+}Pelicula;
 
 
 
@@ -21,7 +21,7 @@ typedef struct
  * \return Retorna un empleado nuevo
  *
  */
-Employee* employee_new();
+Pelicula* pelicula_new();
 
 
 /** \brief Crea un empleado nuevo y lo devuelve por retorno
@@ -32,7 +32,7 @@ Employee* employee_new();
  * \param char* sueldoStr sueldo del empleado
  * \return Retorna un empleado nuevo
  */
-Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr);
+Pelicula* pelicula_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr);
 
 
 
@@ -41,14 +41,14 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
  * \param int id id del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_setId(Employee* this,int id);
+int movie_setId(Pelicula* this,int id);
 
 /** \brief Asigna un id del empleado pasado por parametro a una variable por puntero
  * \param Employee* this empleado
  * \param int id id del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_getId(Employee* this,int* id);
+int movie_getId(Pelicula* this,int* id);
 
 
 /** \brief Asigna un nombre al empleado pasado por parametro
@@ -56,14 +56,14 @@ int employee_getId(Employee* this,int* id);
  * \param char* nombre nombre del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_setNombre(Employee* this,char* nombre);
+int employee_setNombre(Pelicula* this,char* nombre);
 
 /** \brief Asigna un nombre del empleado pasado por parametro a una variable por puntero
  * \param Employee* this empleado
  * \param char* nombre nombre del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_getNombre(Employee* this,char* nombre);
+int employee_getNombre(Pelicula* this,char* nombre);
 
 
 /** \brief Asigna  horas de trabajo al empleado pasado por parametro
@@ -71,14 +71,14 @@ int employee_getNombre(Employee* this,char* nombre);
  * \param int horasTrabajadas horas de trabajo del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas);
+int employee_setHorasTrabajadas(Pelicula* this,int horasTrabajadas);
 
 /** \brief Asigna horas de trabajo del empleado pasado por parametro a una variable por puntero
  * \param Employee* this empleado
  * \param int horasTrabajadas horas de trabajo del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas);
+int employee_getHorasTrabajadas(Pelicula* this,int* horasTrabajadas);
 
 
 /** \brief Asigna un nombre al empleado pasado por parametro
@@ -86,19 +86,19 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas);
  * \param int sueldo sueldo del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_setSueldo(Employee* this,int sueldo);
+int employee_setSueldo(Pelicula* this,int sueldo);
 /** \brief Asigna un id del empleado pasado por parametro a una variable por puntero
  * \param Employee* this empleado
  * \param int sueldo sueldo del empleado
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  */
-int employee_getSueldo(Employee* this,int* sueldo);
+int employee_getSueldo(Pelicula* this,int* sueldo);
 
 /** \brief Imprime por consola un empleado
  * \param Employee* this empleado
  * \return void
  */
-void employee_printfOne(Employee* this);
+void employee_printfOne(Pelicula* this);
 
 
 

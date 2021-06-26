@@ -521,9 +521,11 @@ int ll_remove(LinkedList *this, int index) {
 		return returnAux;
 
 	}
+/*
+linkdlist ll_map(lindkedlist* this,void(*fn)(void* element)){
+	if(this != NULL && fn ==NULL)
+};
 
 
-
-
-
+*/
 
