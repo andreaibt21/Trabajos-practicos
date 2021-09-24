@@ -9,7 +9,7 @@
  * \return int
  *
  */
-int controller_addMovie(LinkedList* pointerArrayListEmployee);
+int controller_addLibro(LinkedList* pointerArrayListEmployee);
 
 /** \brief Modificar datos de empleado
  *
@@ -17,7 +17,7 @@ int controller_addMovie(LinkedList* pointerArrayListEmployee);
  * \return int
  *
  */
-int controller_editMovie(LinkedList* pointerArrayListEmployee);
+int controller_editLibro(LinkedList* pointerArrayListEmployee);
 /** \brief Baja de empleado
  *
  * \param pointerArrayListEmployee LinkedList*
@@ -25,7 +25,7 @@ int controller_editMovie(LinkedList* pointerArrayListEmployee);
  *
  */
 
-int controller_removeMovie(LinkedList* pointerArrayListEmployee);
+int controller_removeLibro(LinkedList* pointerArrayListEmployee);
 
 /** \brief Listar empleados
  *
@@ -33,14 +33,14 @@ int controller_removeMovie(LinkedList* pointerArrayListEmployee);
  * \return int
  *
  */
-int controller_ListMovie(LinkedList* pointerArrayListEmployee);
+int controller_ListLibro(LinkedList* pointerArrayListEmployee);
 /** \brief Ordenar empleados
  *
  * \param pointerArrayListEmployee LinkedList*
  * \return Retorna 0 si fue un exito, -1 si hubo un error
  *
  */
-int controller_sortMovie(LinkedList* pointerArrayListEmployee);
+int controller_sortLibro(LinkedList* pointerArrayListEmployee);
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *

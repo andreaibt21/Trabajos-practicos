@@ -10,10 +10,10 @@
 #include "utn.h"
 
 
-int controller_addMovie(LinkedList* pointerArrayListEmployee){
+int controller_addLibro(LinkedList* pointerArrayListEmployee){
 
 	int retorno = -1;
-    Pelicula *auxiliarEmployee = NULL;
+    Libro *auxiliarEmployee = NULL;
     int  auxiliarId = 0;
 	int idMaximo;
 	char auxiliarNombre[200];
@@ -36,7 +36,7 @@ int controller_addMovie(LinkedList* pointerArrayListEmployee){
 							for(int i=0; i<cantidadEmployees ; i++){
 
 								auxiliarEmployee =ll_get(pointerArrayListEmployee, i);
-								movie_getId(auxiliarEmployee, &idMaximo);
+								libro_getId(auxiliarEmployee, &idMaximo);
 
 								if(  auxiliarId>idMaximo ){
 									idMaximo = auxiliarId;
@@ -48,7 +48,7 @@ int controller_addMovie(LinkedList* pointerArrayListEmployee){
     				    printf("auxiliarId %d idMaximo  %d", auxiliarId, idMaximo);
     					auxiliarEmployee = pelicula_new();
 
-    					if(   (movie_setId(auxiliarEmployee, idMaximo) == 0) &&
+    					if(   (libro_setId(auxiliarEmployee, idMaximo) == 0) &&
   							  (employee_setNombre(auxiliarEmployee, auxiliarNombre) == 0) &&
 							  (employee_setHorasTrabajadas(auxiliarEmployee, auxiliarHorasTrabajadas) == 0) &&
 							  (employee_setSueldo(auxiliarEmployee, auxiliarSueldo) == 0)
@@ -68,11 +68,11 @@ int controller_addMovie(LinkedList* pointerArrayListEmployee){
 }
 
 
-int controller_editMovie(LinkedList* pointerArrayListEmployee)
+int controller_editLibro(LinkedList* pointerArrayListEmployee)
 {
 
 	int retorno = -1;
-	Pelicula *auxiliarEmployee = NULL;
+	Libro *auxiliarEmployee = NULL;
 	int  auxiliarId = 0;
 	char auxiliarNombre[200];
 	int auxiliarHorasTrabajadas;
@@ -89,7 +89,7 @@ int controller_editMovie(LinkedList* pointerArrayListEmployee)
 				cantidadEmployees = ll_len(pointerArrayListEmployee);
 				for(int i=0; i<cantidadEmployees ; i++){
 					auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-					movie_getId(auxiliarEmployee, &idMaximo);
+					libro_getId(auxiliarEmployee, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
 
@@ -102,7 +102,7 @@ int controller_editMovie(LinkedList* pointerArrayListEmployee)
 
 					for (int i = 0; i < cantidadEmployees; i++) {
 						auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-						movie_getId(auxiliarEmployee, &auxiliarId);
+						libro_getId(auxiliarEmployee, &auxiliarId);
 
 						if (idEmployeeACambiar == auxiliarId) {
 							printf("\nEmpleado encontrado");
@@ -157,11 +157,11 @@ int controller_editMovie(LinkedList* pointerArrayListEmployee)
 }
 
 
-int controller_removeMovie(LinkedList* pointerArrayListEmployee)
+int controller_removeLibro(LinkedList* pointerArrayListEmployee)
 {
 
 	int retorno = -1;
-	Pelicula *auxiliarEmployee = NULL;
+	Libro *auxiliarEmployee = NULL;
 	int  auxiliarId = 0;
 	char validacion;
 	int idEmployeeACambiar;
@@ -177,7 +177,7 @@ int controller_removeMovie(LinkedList* pointerArrayListEmployee)
 				cantidadEmployees = ll_len(pointerArrayListEmployee);
 				for(int i=0; i<cantidadEmployees ; i++){
 					auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-					movie_getId(auxiliarEmployee, &idMaximo);
+					libro_getId(auxiliarEmployee, &idMaximo);
 					if(  auxiliarId>idMaximo ){
 						idMaximo = auxiliarId;
 					};
@@ -188,7 +188,7 @@ int controller_removeMovie(LinkedList* pointerArrayListEmployee)
 
 					for (int i = 0; i < cantidadEmployees; i++) {
 						auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-						movie_getId(auxiliarEmployee, &auxiliarId);
+						libro_getId(auxiliarEmployee, &auxiliarId);
 
 						if (idEmployeeACambiar == auxiliarId) {
 							printf("\nEmpleado encontrado");
@@ -221,7 +221,7 @@ int controller_removeMovie(LinkedList* pointerArrayListEmployee)
 	return retorno;
 }
 
-int controller_ListMovie(LinkedList* pointerArrayListEmployee)
+int controller_ListLibro(LinkedList* pointerArrayListEmployee)
 {
 	int retorno = -1;
 	int  auxiliarId;
@@ -235,9 +235,9 @@ int controller_ListMovie(LinkedList* pointerArrayListEmployee)
 
 
 		for(int i = 0; i < lenghtEmployees; i++ ){
-			Pelicula*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
+			Libro*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
 
-			movie_getId( auxiliarEmployee, &auxiliarId);
+			libro_getId( auxiliarEmployee, &auxiliarId);
 			employee_getNombre(auxiliarEmployee, auxiliarNombre);
 			employee_getHorasTrabajadas(auxiliarEmployee, &auxiliarHorasTrabajadas);
 			employee_getSueldo(auxiliarEmployee, &auxiliarSueldo);
@@ -259,7 +259,7 @@ int controller_ListMovie(LinkedList* pointerArrayListEmployee)
 }
 
 
-int controller_sortMovie(LinkedList* pointerArrayListEmployee)
+int controller_sortLibro(LinkedList* pointerArrayListEmployee)
 {
 		int retorno = -1;
 		int(*funcionTipoOrden)(void*,void*);
@@ -333,8 +333,8 @@ int controller_saveAsText(char* path , LinkedList* pointerArrayListEmployee)
 			fprintf( pointerFile,"id,    nombre,    horasTrabajadas,    sueldo\n");
 			for(int i = 0; i < ll_len(pointerArrayListEmployee); i++){
 
-				Pelicula  *auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
-				if(movie_getId( auxiliarEmployee, &auxiliarId) == 0 &&
+				Libro  *auxiliarEmployee = ll_get(pointerArrayListEmployee, i);
+				if(libro_getId( auxiliarEmployee, &auxiliarId) == 0 &&
 				employee_getNombre(auxiliarEmployee, auxiliarNombre) == 0 &&
 				employee_getHorasTrabajadas(auxiliarEmployee, &auxiliarHorasTrabajadas) == 0 &&
 				employee_getSueldo(auxiliarEmployee, &auxiliarSueldo) == 0 ){
@@ -373,9 +373,9 @@ int controller_saveAsBinary(char* path , LinkedList* pointerArrayListEmployee)
 
 			for(int i = 0; i < lenghtEmployees; i++ ){
 
-				Pelicula*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
+				Libro*  auxiliarEmployee= ll_get(pointerArrayListEmployee, i);
 				if(pointerFile != NULL){
-					cantidadEscrita = fwrite(auxiliarEmployee, sizeof(Pelicula),1, pointerFile);
+					cantidadEscrita = fwrite(auxiliarEmployee, sizeof(Libro),1, pointerFile);
 				};
 			}
 			if (cantidadEscrita < 1){
@@ -406,7 +406,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
 			FILE *pointerFile=fopen(path,"r");
 
 			if(pointerFile != NULL &&
-			   parser_EmployeeFromText(pointerFile, pointerArrayListEmployee) == 0 ){
+			   parser_LibroFromText(pointerFile, pointerArrayListEmployee) == 0 ){
 				printf("\nArchivo leido y cerrado con éxito");
 				retorno = 0;
 
@@ -425,7 +425,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
 					ll_clear(pointerArrayListEmployee);
 					FILE *pointerFile=fopen(path,"r");
 
-					if(pointerFile != NULL && parser_EmployeeFromText(pointerFile, pointerArrayListEmployee) == 0 )
+					if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListEmployee) == 0 )
 					{
 						printf("\nArchivo nuevo leido y cerrado con éxito");
 						fclose(pointerFile);
@@ -439,7 +439,7 @@ int controller_loadFromText(char* path , LinkedList* pointerArrayListEmployee){
 
 						FILE *pointerFile=fopen(path,"r");
 
-						if(pointerFile != NULL && parser_EmployeeFromText(pointerFile, pointerArrayListEmployee) == 0 )
+						if(pointerFile != NULL && parser_LibroFromText(pointerFile, pointerArrayListEmployee) == 0 )
 						{
 							printf("\nArchivo nuevo leido y cerrado con éxito");
 							fclose(pointerFile);
@@ -468,7 +468,7 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee)
 	    			FILE *pointerFile=fopen(path,"rb");
 
 	    			if(pointerFile != NULL &&
-	    				parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee) == 0 ){
+	    				parser_LibroFromBinary(pointerFile, pointerArrayListEmployee) == 0 ){
 	    				printf("\nArchivo leido y cerrado con éxito");
 	    				retorno = 0;
 
@@ -488,7 +488,7 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee)
 	    					FILE *pointerFile=fopen(path,"rb");
 
 	    					if(  pointerFile != NULL &&
-	    					     parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee)  == 0  )
+	    					     parser_LibroFromBinary(pointerFile, pointerArrayListEmployee)  == 0  )
 	    					{
 	    						printf("\nArchivo nuevo leido y cerrado con éxito");
 	    						fclose(pointerFile);
@@ -502,7 +502,7 @@ int controller_loadFromBinary(char* path , LinkedList* pointerArrayListEmployee)
 								FILE *pointerFile=fopen(path,"rb");
 
 								if(  pointerFile != NULL &&
-									 parser_EmployeeFromBinary(pointerFile, pointerArrayListEmployee)  == 0  )
+									 parser_LibroFromBinary(pointerFile, pointerArrayListEmployee)  == 0  )
 								{
 									printf("\nArchivo nuevo leido y cerrado con éxito");
 									fclose(pointerFile);
